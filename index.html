@@ -122,7 +122,6 @@
       <button id="swLapBtn" disabled>ラップ</button>
       <button id="swResetBtn" disabled>リセット</button>
     </div>
-    <ul id="lapList"></ul>
     <div class="card" id="savePanel" style="display:none">
       <label>種目</label>
       <select id="svStroke"></select>
@@ -150,7 +149,8 @@
       <button class="btn" id="svSaveBtn">このタイムを保存</button>
       <p class="hint">日付は今日で保存されます。距離が50m以上のときだけ水路（短水路／長水路）を選びます。</p>
     </div>
-  </section>
+    <ul id="lapList"></ul>
+    </section>
 
   <!-- 記録 -->
   <section id="tab-record">
@@ -305,7 +305,13 @@ try { records = JSON.parse(localStorage.getItem(LS_RECORDS)) || []; } catch (e) 
 if (!Array.isArray(records)) records = [];
 let childName = localStorage.getItem(LS_NAME) || "";
 
-function saveRecords() { localStorage.setItem(LS_RECORDS, JSON.stringify(records)); }
+function saveRecords() {
+  try {
+    localStorage.setItem(LS_RECORDS, JSON.stringify(records));
+  } catch (e) {
+    alert("保存できませんでした。このブラウザで開いている場合は、ホーム画面に追加したアプリから開いてみてください。");
+  }
+}
 function toast(msg) {
   const t = document.getElementById("toast");
   t.textContent = msg;
@@ -383,16 +389,21 @@ swMainBtn.addEventListener("click", () => {
     swLapBtn.disabled = false;
     swResetBtn.disabled = true;
     savePanel.style.display = "none";
+    document.getElementById("swSub").textContent = "計測中…";
   } else {
-    swRunning = false;
     swBase = swElapsed();
+    swRunning = false;
     clearInterval(swTimer);
     swTick();
     swMainBtn.textContent = "スタート";
     swMainBtn.classList.remove("running");
     swLapBtn.disabled = true;
     swResetBtn.disabled = false;
-    if (swBase > 0) savePanel.style.display = "";
+    if (swBase > 0) {
+      savePanel.style.display = "";
+      document.getElementById("swSub").textContent = "とまったタイムは下の欄から保存できます";
+      setTimeout(() => savePanel.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+    }
   }
 });
 swLapBtn.addEventListener("click", () => {
