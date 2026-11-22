@@ -1,694 +1,1484 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" type="image/webp" href="data:image/webp;base64,UklGRt4OAABXRUJQVlA4INIOAABQWwCdASoAAQABPpFCnEklpCMhKrSKqLASCU3cEl2kAWoWrrv6ctq/3fC2H4+msH3/M9SXmAc8vzT+eH5zu/Y71pgRO7zrS8Cfze5i7EZb0TflDft9Hbm2Hnv/vz2/vBYo+XyUhB85vX6PqO8h+GtSdSJrGCkFLiw+dFcb5PoHw95aeTAK8mATe1YmPm9i6L83IkX3RJQdud7LZwADDPPGfMdJuRh99yfOXy0tQmqsN7yhP0u/7XD4Id+2QHo/oId3hx1KjfACJid3JLyM2RwDvmElxTLvsZAbXamyNbWDFfaFDMHPljFPS5bn5CP+AeX/SNzLkl9jRS+nxQrk7ycyHFuzJ8nkcohPrDi1pQQjCZAA4TSyjTunk7/yfaY1r7sfjQ4yRr7envN0gb8JgVr/hQUWGMk3AAfA2Ma6f82/I1hjp1J+fuAblNP92AgjSfywOrfPlQJin1aeFFndZopBaIRCI/wn//6SPBkR2o8S2I4ZEGq0XBsLIFc5UGwHbdEZpXu58yQP/OnnSk2m98kZMTv/lpeQfN3he2VXd/1kImyZbItptT03iOSMe5ngG7pdJ8vB470tbl4brU5GNux58lP0WI7FzCIqK7kXDvTLqUSfbczf7NH3/J1kBESOcZFdY7T0bTAbL1B2Q1x/DqWsHVebZFdx2ORCHwuxVP/O2grIH+QCYLISS5iXx/2gN9wLtCBrzyDP9pxSFe3Ldk6dKPxDfrZl/FYxRhEap34JDcz2N2n3ngQ7qf+V4m+nGAWcONvZtjMJe6MUPtDRSneTv+QqRFpuNbAYJX5rbtnANzVZK/TJTiVl3580yiprEqoHpo2xQNoWoaYQhlzha5LsJ2SKasQlKHIKGPmVrgDiXnj2EEDnhzjGQ14juU2P9MFWqZidWLqXJeIdn8ClmuKFuCBB+uMGZBxIFOtIKqpxD5bV9KZLteTRqxBmSYHQXrwgI1F0VTIx5Kli0DmxP/v4p2gAAP769iTvfgRMUgGtfcTHDQPJA9qMnYeSx6JP5Yn/EcIYx7T8plSX4kULRYGYTqkPo67qRgE7k0q5UoAAFXCqLWNb16iMMOB4Vl3pVSnBpn7Y+sGCMkj4ZZacgWeNwtqBLFpFLA/ajDtFpP5vQNYzzbkKBhvRE7OwnLn5/N+RgZQEk35NOGgjm4wzClpQtqAkgADI+mRsx0AeRoYKZu3Phvqv/nvClf14PdLkCb49E42b6S5h/FtBSbfY92ekJELwYOjpJsuOarPxqVNBvpjlMKkJRVmjJ5zyqhAAShJt4MMpmxT3liARVoEpFxCd6DT4nopxUSF4iCZB9ydMpXuWQupZQJZIb+UANrFvAmu1jVIH8xVlF25kKiJklmWeNz2kYVu27cFLQJROgWIb33Jk1s8l/UezNwVefiHdjmeUcRbmXmwIcntdKycKrLrXFv+fGLmoW44nJsaR6p/s+rRU3uYdPja0D+dYWc+QtzEs+mFL9H6nnJHyS+NcF8tKHjtG+wClwPjR26z9lQ7hfjOlRnXQwH4BA6eGMhi3F6QC/jQp7E98lLkRlDkQFgnfeQkHivDkSEhE0ZzBDFGXLxoFzM45RNJu3vv/h3EHpWjVu7YS4lS0kEQ+eyidu22/bFec3jRoUGOX10RclIX+snypwPg97TJiJKoIYXVx/VYKJqKz9ys79Qygx8a/gcswoNXAlS9zyW3j21YX3m9CtVeajpMf4KOCWQd1WNCT0kRdx9t9Gsii38ZXOaKFYtzuTvyJWabcZ3ybe7QM1AQpoD/b7Z3Q99asOVspeeS5eR7sT9BC3w9yFk3kCSLBaEDvPBcuqC4QwTNtdD6gyyGvAdBobZkpDREBXcjh534bIB7Wmay7Up6C6KFDmDMO9EVptBgw/LNc29PKAj5kxaFEcsmThNdip3a2hxEMDg1PQr/fcHF8BD3+KRpif3x8hPAinJABqPr51yd6zqFtNr2+otT9bma+y7TOs+uEfRhpydTIQXwcGUASsysbqwLvPE/Wo0RiyRHJE/dUWlr4WZXU3xk/q2NxjjjbWDObLcl+RodI0rIgoGIe5UU+7IgRL7Y8ee2liu6CFOZvByHGi8VuFhbudA3UAUMAbsO6HdwsnqGjD04lzd1Q8AnbE1iGPcQRg+7oAtGx3ItqAzZVnBKK16K5x6xaK5K2YKTE+HRBZnsWosaaHFLlDuaP7xXk47NWRXOzE64Ydde08W5pWHZvu14ehf7xpA5zH6HZhMuscDJ7BU8ZSCgXJydYyPh4db6b6JRN+11vM+TZb2oqzG5sIX8ezJPw2yum1pUsNnDwIiKUhht3++mHsgpaNF4UwDWvw5SerbvhBajPbs5/NKAZXwJJguysABDGbnEpm8VelkozZVZaa9cKE84y+0GSKaYnb2OEVf4dvV9OZJKyZQ14e85k30t+gWkxkf2uIN4ynNgq5AI8zB88ZV839grsvtXwe50DPrILWApxcHJkFEsut7JF6iFg44j2h/orLJmtCc/gQuD3Va/FxZEON60JHjYumfh6hu2lyPeDxr/rbjrOrp6nd4DE4dn4IU+oSg9iH4YYIzMxFvbFhx6GXDO5dfLvqBSDqLS9kqIJg/mZ0GT9N5jiNA/LREWA0oLmv++TiSZbPgT2j0MAsCoALvv7Jxm/ghAZWyOjc0P0B/Y9dt1ZOZTyPvaEA239mNvos40HFLfDQFDn59o+Xu3RA76BJGNmjrardMdF0idUHQoHVWVqYxxLVoOW2XXvnW/dtzq0YqdPet8LPM8IvzvRZyxWpoM8XczMC2ZlHWctqV8//aR4UK4wfl0bu/pCw3fOt2xwI0m+v+sZKAxc0CqeWRhnbQ2Tjd9TxG3VMt/TNY9n3YnYgc8xtUafE+MuVbcWcfwzMeiHCpUk59emhG9zL2TKSLS18VMDjD0cnUw1tWrrxAOFVUjV8JomgDCESBDLDeu4LmUVi7U2OuvVBZFEmss8wxV6G936ypf2aZS13DNdEt3Tn9SQl2Y3n31cWRoVQ9fn5z0slsXkb09ul3mAVx2A5m7+UFtOtEEhLDwYyeTaHm8TcvSgKcQL/2rxmCjVpXr1y37NLTPpc+q3X09rFErIwS/webUh7nv+Uvh/uTy5opCNaxeGwPjQEegpYNCtr+cr9yrv9cFzlLR2nG4s9EtrxJp2SZqC9BDx0uxxu2gOp4jS8Xdg7SoCtY0bRvXcreOJpANGvAxCgepZZLrLLJ7QZSssXvGwvGOxJ5n8rGBvaOppY7mggb29QCyYQmTJY1+lTiJnUxS9w2SzVymhMmDzca6cZ0HAfsi9Vb9HK3fytbfUKfdwjpajdvlMjpxYDCepx87CBd194XgclBgVRTPNJIxo2YjcX4MpRa2WYpK+Bu8ZhuLzTC/JSc3a1uM66urNFPRZC3AWemBBu68P9OAa4T5jdmqqxfnayf/4l5ObTy2LgDCuTA8E+fS6TReuvRIAbH4p8hPisPrKjNpZ0ZPenAFJEbFBpzDSp9tjF3ZrJQ0etivFs3CeQtMqbVmLJs/S87VSAcq+GmixYbozLF7XlmhK0nwIh6pEroqqAJQGFfGak+ctqLHu7HR53bid7IU1RfcotdERNHzT0lo2kTaxummoQRXWO+pVe55XcEbTz9F1QykWS0x8XxBXvJJJ4GA5C1K6dd0elb/xIj+pxGLM0KXo6BANsoijNnMqatxVxYzRQe8hkuN4lm04DpTK+PyhG+TVir3iYAEbmeLTWxnXeM5WWakz18ca/DxqRUY3revfx4bEYRqgeeW2Oz63LRX22ievLqTuVk3G2kuTeVyQYqOASKAQaW/sjkoyOnAFHv0ZUnAX0bsLybfwycwwLGXkYPd+VzCl0PYMW3iSKNbZ4s+d+QdZsfUnLrB0d49jG79gh/t3LtuTl9gs/oV24qTzm+cZD3VGmFTl/3F3tD+VLzgFsEBVonBsMESRueQzorby1sD88ZIoXml/LCYEfg3ClaJM3mjGimR4X73xD+GLjSjLZ7e2SoSjVRz6uTNGF8oy/1Cz7p95OSolkBHza5eMF+os9+TaRjDhTVcG0fKXa20wi3Xp/Fb5s8w5fhpxjnmjlHkkJjqxk7iD3CdpLTUB16ABy4eR9HkYkYTcDhbTXroQAQ+432wkQIYq8e2JWSmn9O56rJYx0IJU5WQPHE4dkz957qovr+kozyxLf1dABd9V4bxMFhB65yIN/D04NmVwxcTj9tCWhsaa9s/mQi2h4fdZmGGtliFquAjDgI9EsZVWHt0izp3HNv+ogAboWSjwUQrA/3pplR7J2YaFmv0wvYc6UJcz1yaUcphPn6oLMb3x+49uxdHGuPbzQT/N6W1vc/Q/jDMx9IR0V1wwL7VsbPDFFuRWj2Cchwp4DkKxS8yGA8kpPhWs4xymirXKmmyCz40D/gSyOp5S2+f3LbH8VzJ8VpahpnLy5/VlKltSGdnG8hdXitExsB/4Lxdl6vULcjipCUA+xkm3f+cPkq4eSZFJEf5CCOwJ4+tEFEzY7OYKHcEJwO5O5RbEFZzcVI6+TGqfF2JUacP17Oa4Z974rnIzCdgHkVxf7IpJ2kXtEPdH2nQeUx9RFsf90juXnUvbM0CwF9E6E7W4thSb4oXaekPYCAKOqqbVjuqxpIvcJyFfGlUhVqHHf3QKWWombdtjQXjEfkTDh4s+F+tpu5NRvt/opyoQNY7l2/Q/7xMA51VQpd/IpZrqT91Ug3VbhBEnE3Sq/q+B6l/hTuPDgDIEgwKzKhcjl5vhh3YTwM6O1Z+CCRWG+ziAvXmXiFxI8KwjcxGt8blyYnXcVLqfKPcyMnmAjIaDA4EhFJQUDWcYJZrB2+7GH2XhXAxqXRrRGrDXmhCDkuwUNH4cStRLgIc7NsLcJ0mMt4XEbvGCX7SYwZFMnYE1yYk/8GCcmIq0C6kWeil0ZsbKC/U3DBK1IRqADQxm5bxaYK+EVBOY/7LXPTwQ/1q8qhwz/ETpT0I9D5gQckfl/Yb5b3rprfmo17iwMg3nVqKCHR9gGzTtcYyUQMs8aRsyDudn8sfxrR4WBWZH08lB+mnyznpPm0lLxeK2xAAAAA==" />
+<link rel="apple-touch-icon" href="data:image/webp;base64,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" />
 <title>スイミング記録</title>
-<meta name="description" content="子どものスイミングのタイム記録アプリ">
-<link rel="manifest" href="./manifest.json">
-<meta name="theme-color" content="#0284c7">
-<link rel="icon" type="image/png" href="./icon-192.png">
-<link rel="apple-touch-icon" href="./icon-192.png">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-  html, body { height: 100%; }
-  body {
-    font-family: -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
-    background: #e0f2fe; color: #0c4a6e;
-    padding: env(safe-area-inset-top) 16px calc(96px + env(safe-area-inset-bottom));
-    max-width: 560px; margin: 0 auto;
+  :root{
+    --bg:#eaf6fb;
+    --bg2:#f7fcfe;
+    --surface:#ffffff;
+    --surface2:#eef7fb;
+    --line:#cfe8f2;
+    --text:#0f2f42;
+    --muted:#5b7a8c;
+    --primary:#0284c7;
+    --primary-dark:#0369a1;
+    --primary-soft:#e0f2fe;
+    --accent:#d97706;
+    --accent-bg:#fef3c7;
+    --danger:#dc2626;
+    --danger-bg:#fef2f2;
+    --ok:#047857;
+    --ok-bg:#ecfdf5;
+    --shadow:0 6px 20px rgba(2,132,199,.10);
+    --radius:16px;
   }
-  header { display: flex; align-items: center; gap: 10px; padding: 16px 0 4px; }
-  header img { width: 38px; height: 38px; border-radius: 9px; }
-  header h1 { font-size: 19px; }
-  header .who { margin-left: auto; font-size: 13px; color: #0369a1; }
-  main section { display: none; }
-  main section.active { display: block; }
-  .card { background: #fff; border-radius: 14px; padding: 16px; margin-top: 14px; box-shadow: 0 1px 5px rgba(2,132,199,.12); }
-  label { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 6px; }
-  label:first-child { margin-top: 0; }
-  select, input[type="date"], input[type="text"], input[type="number"] {
-    width: 100%; font-size: 16px; padding: 12px; border-radius: 10px;
-    border: 2px solid #bae6fd; background: #fff; color: #0c4a6e;
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0a1f2e;
+      --bg2:#0d283c;
+      --surface:#123144;
+      --surface2:#173d56;
+      --line:#24506e;
+      --text:#eaf6fb;
+      --muted:#9fc2d6;
+      --primary:#38bdf8;
+      --primary-dark:#7dd3fc;
+      --primary-soft:#0e3a56;
+      --accent:#fbbf24;
+      --accent-bg:#3a2f0b;
+      --danger:#f87171;
+      --danger-bg:#3b1515;
+      --ok:#34d399;
+      --ok-bg:#0b2f26;
+      --shadow:0 6px 20px rgba(0,0,0,.35);
+    }
   }
-  .row { display: flex; gap: 10px; }
-  .row > div { flex: 1; }
-  .btn {
-    display: block; width: 100%; padding: 15px; font-size: 16px; font-weight: 700;
-    color: #fff; background: #0284c7; border: none; border-radius: 999px; cursor: pointer; margin-top: 18px;
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
+    background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 220px,var(--bg2) 100%);
+    color:var(--text);
+    line-height:1.6;
   }
-  .btn:active { background: #0369a1; }
-  .btn.sub { background: #e0f2fe; color: #0369a1; }
-  .btn.danger { background: #fee2e2; color: #b91c1c; }
-  .hint { font-size: 12.5px; color: #64748b; line-height: 1.6; margin-top: 10px; }
-  /* 計測 */
-  #swTime {
-    text-align: center; font-size: 54px; font-weight: 800; font-variant-numeric: tabular-nums;
-    letter-spacing: 1px; margin-top: 10vh;
+  button,select,input,textarea{font:inherit;color:inherit}
+  button,[role="button"],select,input:not([type="checkbox"]):not([type="radio"]),textarea{ min-height:48px; }
+  .wrap{max-width:760px;margin:0 auto;padding:16px 14px calc(104px + env(safe-area-inset-bottom))}
+
+  /* header summary */
+  .hero{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:18px 18px 14px;
+    box-shadow:var(--shadow);
   }
-  #swSub { text-align: center; font-size: 13px; color: #0369a1; margin-top: 4px; }
-  #swMainBtn {
-    display: block; margin: 5vh auto 0; width: min(68vw, 260px); height: min(68vw, 260px);
-    border-radius: 50%; border: none; cursor: pointer;
-    background: #0284c7; color: #fff; font-size: 30px; font-weight: 800;
-    box-shadow: 0 8px 24px rgba(2,132,199,.35);
+  .hero h1{font-size:22px;line-height:1.3;margin:0 0 4px;letter-spacing:.01em}
+  .hero h1{display:flex;align-items:center;gap:10px}
+  .hero h1 .app-icon{width:34px;height:34px;border-radius:9px;flex:none;display:block}
+  .hero h1 .wave{color:var(--primary)}
+  .hero p{margin:0;color:var(--muted);font-size:14px}
+  .stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}
+  .stat{background:var(--surface2);border:1px solid var(--line);border-radius:14px;padding:10px 8px;text-align:center}
+  .stat b{display:block;font-size:20px;line-height:1.2;color:var(--primary-dark)}
+  .stat span{font-size:12px;color:var(--muted)}
+
+  /* bottom tab bar — fixed at the bottom of the screen, inside thumb reach */
+  .tabs{
+    position:fixed;left:0;right:0;bottom:0;z-index:40;
+    display:grid;grid-template-columns:repeat(6,1fr);
+    background:var(--surface);border-top:1.5px solid var(--line);
+    padding:6px 4px calc(6px + env(safe-area-inset-bottom));
+    box-shadow:0 -6px 20px rgba(2,132,199,.10);
   }
-  #swMainBtn.running { background: #dc2626; }
-  #swMainBtn:active { transform: scale(.98); }
-  .swBtns { display: flex; justify-content: center; gap: 16px; margin-top: 26px; }
-  .swBtns button {
-    width: 92px; height: 92px; border-radius: 50%; border: 2px solid #7dd3fc; cursor: pointer;
-    background: #fff; color: #0369a1; font-size: 16px; font-weight: 700;
+  .tab-btn{
+    border:0;background:transparent;border-radius:12px;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    font-weight:700;font-size:11px;line-height:1.2;padding:6px 2px;min-height:60px;color:var(--muted);
   }
-  .swBtns button:disabled { opacity: .35; }
-  #lapList { list-style: none; margin-top: 18px; }
-  #lapList li {
-    background: #fff; border-radius: 10px; padding: 10px 14px; margin-bottom: 8px;
-    display: flex; justify-content: space-between; font-size: 15px; font-variant-numeric: tabular-nums;
-    box-shadow: 0 1px 4px rgba(2,132,199,.08);
+  .tab-btn .ticon{font-size:23px;line-height:1}
+  .tab-btn[aria-selected="true"]{background:var(--primary-soft);color:var(--primary-dark)}
+  .tab-btn-measure{color:var(--accent)}
+  .tab-btn-measure[aria-selected="true"]{background:var(--accent);color:#fff}
+
+  /* measure-first: when the measure tab is open, hide the header summary so
+     the stopwatch is usable immediately with no scrolling */
+  body.is-measure .hero{display:none}
+  body.is-measure .wrap{padding-top:10px}
+  .tab-btn:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--primary);outline-offset:2px}
+
+  .panel{display:none}
+  .panel.active{display:block}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-bottom:14px}
+  .card h2{font-size:17px;margin:0 0 12px}
+  .card h3{font-size:15px;margin:18px 0 8px}
+  label.f{display:block;font-weight:700;font-size:14px;margin:14px 0 6px}
+  label.f:first-of-type{margin-top:0}
+  .hint{font-size:13px;color:var(--muted);margin-top:4px}
+  input[type="text"],input[type="date"],textarea,select{
+    width:100%;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);
+    padding:14px 12px;font-size:16px;
   }
-  #lapList .lapTime { font-weight: 700; }
-  /* 一覧 */
-  .recItem { background: #fff; border-radius: 12px; padding: 12px 14px; margin-top: 10px; box-shadow: 0 1px 4px rgba(2,132,199,.08); }
-  .recItem .top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
-  .recItem .what { font-weight: 700; font-size: 15px; }
-  .recItem .time { font-weight: 800; font-size: 19px; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .recItem .meta { font-size: 12.5px; color: #64748b; margin-top: 3px; }
-  .recItem .del { background: none; border: none; color: #b91c1c; font-size: 12.5px; text-decoration: underline; cursor: pointer; padding: 4px 0 0; }
-  .pb { display: inline-block; background: #fef3c7; color: #92400e; border-radius: 999px; font-size: 11px; font-weight: 700; padding: 2px 8px; margin-left: 6px; vertical-align: 2px; }
-  .empty { text-align: center; color: #64748b; font-size: 14px; padding: 28px 10px; line-height: 1.7; }
-  /* ベスト */
-  table.best { width: 100%; border-collapse: collapse; font-size: 14.5px; }
-  table.best th, table.best td { padding: 9px 6px; border-bottom: 1px solid #e0f2fe; text-align: left; }
-  table.best td.t { font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  table.best td.d { color: #64748b; font-size: 12.5px; white-space: nowrap; }
-  /* グラフ */
-  #chart { width: 100%; height: auto; display: block; }
-  /* タブバー */
-  nav#tabs {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
-    background: rgba(255,255,255,.96); border-top: 1px solid #bae6fd;
-    padding-bottom: env(safe-area-inset-bottom);
+  textarea{min-height:64px;resize:vertical}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:480px){ .row2{grid-template-columns:1fr 1fr} }
+
+  /* segmented kind toggle */
+  .seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .seg label{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    border:1.5px solid var(--line);border-radius:12px;padding:12px;min-height:52px;
+    font-weight:700;cursor:pointer;background:var(--surface);
   }
-  nav#tabs .inner { display: flex; max-width: 560px; margin: 0 auto; }
-  nav#tabs button {
-    flex: 1; background: none; border: none; cursor: pointer; padding: 9px 0 7px;
-    font-size: 11.5px; color: #64748b; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  .seg input{width:20px;height:20px;accent-color:var(--primary)}
+  .seg label:has(input:checked){border-color:var(--primary);background:var(--primary-soft);color:var(--primary-dark)}
+
+  .preview{
+    margin-top:10px;border-radius:12px;padding:12px 14px;font-size:15px;display:none;
   }
-  nav#tabs button .ic { font-size: 19px; line-height: 1; }
-  nav#tabs button[aria-selected="true"] { color: #0284c7; font-weight: 700; }
-  #toast {
-    position: fixed; left: 50%; bottom: 110px; transform: translateX(-50%) translateY(20px);
-    background: #0c4a6e; color: #fff; font-size: 14px; padding: 10px 18px; border-radius: 999px;
-    opacity: 0; pointer-events: none; transition: all .25s;
+  .preview.show{display:block}
+  .preview.ok{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok)}
+  .preview.ok b{font-size:20px}
+  .preview.err{background:var(--danger-bg);color:var(--danger);border:1px solid var(--danger);font-weight:700}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    border:0;border-radius:12px;cursor:pointer;font-weight:800;
+    padding:12px 18px;min-height:52px;font-size:16px;text-decoration:none;
   }
-  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .btn-primary{background:var(--primary);color:#fff;width:100%;margin-top:18px;font-size:17px;min-height:60px}
+  @media (prefers-color-scheme: dark){ .btn-primary{color:#06283d} }
+  .btn-sub{background:var(--surface2);color:var(--text);border:1.5px solid var(--line)}
+  .btn-danger{background:var(--danger);color:#fff}
+  .btn-block{width:100%;margin-top:10px}
+  .btn-sm{min-height:44px;padding:8px 14px;font-size:14px}
+
+  .banner{
+    display:none;border-radius:14px;padding:14px 16px;margin-bottom:14px;font-weight:700;
+  }
+  .banner.show{display:block}
+  .banner.ok{background:var(--ok-bg);border:1.5px solid var(--ok);color:var(--ok)}
+  .banner.pb{background:var(--accent-bg);border:1.5px solid var(--accent);color:var(--accent)}
+  .banner.pb .big{font-size:19px}
+
+  /* list */
+  .filters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+  .filters select{min-height:56px}
+  .rec{
+    display:flex;gap:12px;align-items:flex-start;
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:14px;margin-bottom:10px;box-shadow:var(--shadow);
+  }
+  .rec-main{flex:1;min-width:0}
+  .rec-top{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .rec-date{font-size:13px;color:var(--muted);font-weight:700}
+  .badge{display:inline-flex;align-items:center;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:800;min-height:24px}
+  .badge-kind-meet{background:#fce7f3;color:#9d174d;border:1px solid #f9a8d4}
+  .badge-kind-practice{background:var(--primary-soft);color:var(--primary-dark);border:1px solid var(--line)}
+  .badge-course{background:var(--surface2);color:var(--text);border:1px solid var(--line)}
+  .badge-pb{background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent)}
+  @media (prefers-color-scheme: dark){ .badge-kind-meet{background:#3d1226;color:#f9a8d4;border-color:#6d2444} }
+  .rec-title{font-weight:800;font-size:16px;margin-top:2px}
+  .rec-time{font-size:24px;font-weight:900;color:var(--primary-dark);line-height:1.25;font-variant-numeric:tabular-nums}
+  .rec-memo{font-size:14px;color:var(--muted);white-space:pre-wrap;word-break:break-word}
+  .del-btn{
+    flex:none;background:var(--danger-bg);color:var(--danger);border:1px solid var(--danger);
+    border-radius:10px;min-width:52px;min-height:44px;padding:8px 10px;font-weight:700;cursor:pointer;font-size:13px;
+  }
+  .empty{
+    text-align:center;color:var(--muted);padding:28px 16px;background:var(--surface);
+    border:1.5px dashed var(--line);border-radius:var(--radius);font-size:15px;
+  }
+
+  /* best */
+  .best-item{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    border:1px solid var(--line);background:var(--surface2);border-radius:14px;padding:12px 14px;margin-bottom:10px;
+  }
+  .best-item .name{font-weight:800}
+  .best-item .meta{font-size:13px;color:var(--muted)}
+  .best-item .time{font-size:22px;font-weight:900;color:var(--primary-dark);font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+  .best-item .time small{display:block;font-size:12px;color:var(--muted);font-weight:600}
+
+  /* graph */
+  .graph-box{background:var(--surface2);border:1px solid var(--line);border-radius:14px;padding:10px;overflow:hidden}
+  .graph-box svg{width:100%;height:auto;display:block}
+  .g-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:8px}
+  .dot{display:inline-block;width:11px;height:11px;border-radius:50%;vertical-align:-1px;margin-right:5px}
+
+  /* settings */
+  .set-row{border-top:1px solid var(--line);padding:14px 0}
+  .set-row:first-of-type{border-top:0;padding-top:2px}
+  .set-row p{margin:4px 0 10px;font-size:14px;color:var(--muted)}
+  .btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media (max-width:520px){ .btn-grid{grid-template-columns:1fr} .stats{grid-template-columns:1fr 1fr 1fr} }
+  .file-label{
+    display:inline-flex;align-items:center;justify-content:center;width:100%;
+    background:var(--surface2);border:1.5px solid var(--line);border-radius:12px;
+    min-height:52px;padding:12px 18px;font-weight:800;cursor:pointer;font-size:16px;
+  }
+  input[type="file"]{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+  .note{font-size:13px;color:var(--muted)}
+
+  /* stopwatch — one-hand layout: the time display sits up top (read-only),
+     a big round start/stop button floats at centre-slightly-low (its centre
+     lands around 55–60% of the screen height, in the natural thumb arc),
+     the lap / stopped actions sit directly under the round button, and the
+     lap list scrolls in whatever space is left down to the tab bar — so
+     neither laps nor the sub-buttons ever move the round button */
+  .measure-shell{
+    display:flex;flex-direction:column;
+    height:calc(100vh - 92px - env(safe-area-inset-bottom));
+    height:calc(100dvh - 92px - env(safe-area-inset-bottom));
+    min-height:400px;
+    padding-bottom:10px;
+  }
+  .sw-display{text-align:center;padding:10px 10px 4px;flex:none}
+  /* Fixed-height spacer (sized from the viewport, never from content) that
+     drops the round button so its centre sits at ~57.5% of screen height:
+     wrap top (10) + display (~162) + spacer + radius (half of
+     min(68vw, 260px)) ≈ 0.575 × height */
+  .sw-top-spacer{flex:0 0 clamp(16px, calc(57.5dvh - 172px - min(34vw, 130px)), 220px)}
+  .sw-stage{flex:none;display:flex;flex-direction:column;align-items:center;width:100%}
+  /* while saving, the stage takes the remaining height and scrolls, and the
+     lap list steps aside — the quick-save panel stays in the lower half */
+  .measure-shell.is-saving .sw-stage{flex:1 1 auto;min-height:0;overflow-y:auto;align-items:stretch}
+  .measure-shell.is-saving .sw-laps-scroll{display:none}
+  #swControls{width:100%;display:flex;flex-direction:column;align-items:center}
+  .sw-save-panel{width:100%}
+  .sw-time{
+    font-size:76px;line-height:1.05;font-weight:900;letter-spacing:.01em;
+    color:var(--text);font-variant-numeric:tabular-nums;font-feature-settings:"tnum";
+  }
+  @media (max-width:380px){ .sw-time{font-size:58px} }
+  .sw-status{font-size:15px;font-weight:700;color:var(--muted);margin-top:6px;min-height:24px}
+  .sw-status.running{color:var(--ok)}
+  .sw-dist{
+    display:inline-block;margin-top:8px;background:var(--primary-soft);color:var(--primary-dark);
+    border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-weight:800;font-size:15px;
+  }
+  .sw-laps-scroll{flex:1 1 auto;overflow-y:auto;min-height:0;margin-top:14px;width:100%}
+  .sw-main-btn{
+    width:min(68vw,260px);height:min(68vw,260px);min-height:min(68vw,260px);flex:none;border:0;border-radius:50%;cursor:pointer;font-weight:900;
+    font-size:38px;padding:18px 14px;line-height:1.3;letter-spacing:.04em;box-shadow:0 12px 30px rgba(2,132,199,.28);
+    display:flex;align-items:center;justify-content:center;text-align:center;
+  }
+  @media (max-width:380px){ .sw-main-btn{font-size:34px} }
+  .sw-main-start{background:var(--primary);color:#fff}
+  @media (prefers-color-scheme: dark){ .sw-main-start{color:#06283d} }
+  .sw-main-stop{background:var(--danger);color:#fff}
+  .sw-btn{
+    border:0;border-radius:999px;cursor:pointer;font-weight:900;min-height:72px;
+    font-size:20px;padding:14px 10px;line-height:1.2;box-shadow:var(--shadow);
+  }
+  .sw-lap-btn{
+    background:var(--accent);color:#fff;
+    width:110px;height:110px;min-height:110px;flex:none;
+    border-radius:50%;margin-top:14px;font-size:17px;padding:10px;
+    display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.25;
+    box-shadow:0 8px 22px rgba(217,119,6,.28);
+  }
+  #swStoppedActions{width:100%;max-width:420px}
+  .sw-record-btn{background:var(--primary);color:#fff;width:100%;min-height:76px;font-size:22px}
+  @media (prefers-color-scheme: dark){ .sw-record-btn{color:#06283d} }
+  .sw-row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  .sw-reset-btn{background:var(--surface2);color:var(--text);border:2px solid var(--line);box-shadow:none}
+  .sw-resume-btn{background:var(--primary-soft);color:var(--primary-dark);border:2px solid var(--primary);box-shadow:none}
+  /* quick-save panel (inside the measure dock) */
+  .sw-save-time{font-size:16px;margin:2px 0 0}
+  .sw-save-time b{font-size:19px}
+  .sw-save-label{font-weight:800;font-size:14px;margin:14px 0 6px}
+  .chip-group{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    border:2px solid var(--line);background:var(--surface);border-radius:999px;
+    min-height:54px;padding:10px 18px;font-weight:800;font-size:16px;cursor:pointer;color:var(--text);
+  }
+  .chip[aria-pressed="true"]{background:var(--primary);border-color:var(--primary);color:#fff}
+  @media (prefers-color-scheme: dark){ .chip[aria-pressed="true"]{color:#06283d} }
+  .sw-save-btn{margin-top:18px;min-height:66px;font-size:19px}
+  .sw-laps{margin-top:6px}
+  .sw-laps h3{margin:0 0 10px;font-size:16px}
+  .sw-lap-head,.sw-lap-row{
+    display:grid;grid-template-columns:52px 1fr 1fr;gap:8px;align-items:center;
+    padding:10px 12px;font-variant-numeric:tabular-nums;
+  }
+  .sw-lap-head{font-size:12px;font-weight:800;color:var(--muted);padding-bottom:4px}
+  .sw-lap-row{
+    background:var(--surface2);border:1px solid var(--line);border-radius:12px;margin-bottom:8px;
+    font-weight:700;font-size:16px;
+  }
+  .sw-lap-row .no{font-weight:900;color:var(--primary-dark)}
+  .sw-lap-row .lap-t{font-weight:900}
+  .sw-lap-row .cum{color:var(--muted);text-align:right}
+  .sw-lap-head .r,.sw-lap-row .r{text-align:right}
+  .sw-best-lap{border-color:var(--accent);background:var(--accent-bg)}
+  .sw-note{font-size:13px;color:var(--muted);margin-top:10px;text-align:center}
+
+  /* modal */
+  .modal-overlay{
+    display:none;position:fixed;inset:0;background:rgba(4,32,48,.55);z-index:50;
+    align-items:center;justify-content:center;padding:20px;
+  }
+  .modal-overlay.open{display:flex}
+  .modal{background:var(--surface);border-radius:18px;max-width:420px;width:100%;padding:20px;box-shadow:var(--shadow)}
+  .modal h3{margin:0 0 8px;font-size:17px}
+  .modal p{margin:0 0 18px;font-size:15px;white-space:pre-wrap}
+  .modal-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+  .toast{
+    display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:calc(92px + env(safe-area-inset-bottom));z-index:60;
+    background:var(--text);color:var(--bg);border-radius:999px;padding:12px 22px;font-weight:800;
+    box-shadow:var(--shadow);max-width:92vw;text-align:center;font-size:15px;
+  }
+  .toast.show{display:block}
 </style>
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#0284c7" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<link rel="apple-touch-icon" href="icon-192.png" />
 </head>
-<body>
-<header>
-  <img src="./icon-192.png" alt="">
-  <h1>スイミング記録</h1>
-  <span class="who" id="whoLabel"></span>
-</header>
+<body class="is-measure">
+<div class="wrap">
 
-<main>
-  <!-- 計測 -->
-  <section id="tab-measure" class="active">
-    <div id="swTime">0:00.00</div>
-    <div id="swSub">ストップウォッチ</div>
-    <button id="swMainBtn">スタート</button>
-    <div class="swBtns">
-      <button id="swLapBtn" disabled>ラップ</button>
-      <button id="swResetBtn" disabled>リセット</button>
+  <header class="hero">
+    <h1><img class="app-icon" src="data:image/webp;base64,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" alt="" width="34" height="34" /> <span id="childTitle">お子さん</span>のスイミング記録</h1>
+    <p>タイムをためて、ベストの伸びを一緒に見よう。</p>
+    <div class="stats">
+      <div class="stat"><b id="statTotal">0</b><span>記録の数</span></div>
+      <div class="stat"><b id="statKinds">0</b><span>種目×距離</span></div>
+      <div class="stat"><b id="statLatest">—</b><span>最近の記録</span></div>
     </div>
-    <div class="card" id="savePanel" style="display:none">
-      <label>種目</label>
-      <select id="svStroke"></select>
-      <div class="row">
+  </header>
+
+  <!-- 1. 記録する -->
+  <section class="panel" id="panel-record">
+    <div class="banner" id="saveBanner" role="status"></div>
+    <form class="card" id="recordForm" novalidate>
+      <h2>タイムを記録する</h2>
+
+      <label class="f" for="fDate">日付</label>
+      <input type="date" id="fDate" required />
+
+      <div class="row2">
         <div>
-          <label>距離</label>
-          <select id="svDistance"></select>
+          <label class="f" for="fStroke">種目</label>
+          <select id="fStroke">
+            <option>自由形</option>
+            <option>背泳ぎ</option>
+            <option>平泳ぎ</option>
+            <option>バタフライ</option>
+            <option>個人メドレー</option>
+          </select>
         </div>
-        <div id="svCourseWrap">
-          <label>水路</label>
-          <select id="svCourse">
-            <option value="短水路">短水路（25m）</option>
-            <option value="長水路">長水路（50m）</option>
+        <div>
+          <label class="f" for="fDistance">距離</label>
+          <select id="fDistance">
+            <option value="25">25m</option>
+            <option value="50">50m</option>
+            <option value="100">100m</option>
+            <option value="200">200m</option>
           </select>
         </div>
       </div>
-      <label>種類</label>
-      <select id="svKind">
-        <option value="練習">練習</option>
-        <option value="記録会">記録会</option>
-        <option value="大会">大会</option>
-      </select>
-      <label>メモ（任意）</label>
-      <input type="text" id="svMemo" placeholder="レッスン など">
-      <button class="btn" id="svSaveBtn">このタイムを保存</button>
-      <p class="hint">日付は今日で保存されます。距離が50m以上のときだけ水路（短水路／長水路）を選びます。</p>
-    </div>
-    <ul id="lapList"></ul>
-    </section>
 
-  <!-- 記録 -->
-  <section id="tab-record">
-    <div class="card">
-      <label>日付</label>
-      <input type="date" id="fDate">
-      <label>種目</label>
-      <select id="fStroke"></select>
-      <div class="row">
-        <div>
-          <label>距離</label>
-          <select id="fDistance"></select>
+      <div id="fCourseWrap" style="display:none">
+        <label class="f">水路</label>
+        <div class="seg" role="radiogroup" aria-label="水路">
+          <label><input type="radio" name="course" value="短水路" checked /> 短水路（25m）</label>
+          <label><input type="radio" name="course" value="長水路" /> 長水路（50m）</label>
         </div>
-        <div id="fCourseWrap">
-          <label>水路</label>
-          <select id="fCourse">
-            <option value="短水路">短水路（25m）</option>
-            <option value="長水路">長水路（50m）</option>
+        <p class="hint">50m以上は、泳いだプールの長さでベストを分けて記録します。</p>
+      </div>
+
+      <label class="f" for="fTime">タイム</label>
+      <input type="text" id="fTime" inputmode="decimal" autocomplete="off" placeholder="例：45.32 ／ 1:23.45" />
+      <p class="hint">「45.32」（秒だけ）でも「1:23.45」（分：秒）でも入力できます。</p>
+      <div class="preview" id="timePreview" aria-live="polite"></div>
+
+      <label class="f">種別</label>
+      <div class="seg" role="radiogroup" aria-label="種別">
+        <label><input type="radio" name="kind" value="練習" checked /> 練習</label>
+        <label><input type="radio" name="kind" value="大会" /> 大会</label>
+      </div>
+
+      <label class="f" for="fMemo">メモ（任意）</label>
+      <textarea id="fMemo" placeholder="例：ターンがうまくいった、記録会 など"></textarea>
+
+      <button type="submit" class="btn btn-primary">保存する</button>
+    </form>
+  </section>
+
+  <!-- 1b. 測定（ストップウォッチ） -->
+  <section class="panel active" id="panel-measure">
+    <div class="measure-shell">
+      <div class="sw-display">
+        <div class="sw-time" id="swTime" aria-live="off">0:00.00</div>
+        <div class="sw-status" id="swStatus">待機中 — 丸いスタートボタンを押して測定開始</div>
+        <div><span class="sw-dist" id="swDist">0ラップ ＝ 0m相当</span></div>
+      </div>
+
+      <div class="sw-top-spacer" aria-hidden="true"></div>
+
+      <div class="sw-stage">
+        <div id="swControls">
+          <button type="button" class="sw-main-btn sw-main-start" id="swMainBtn">スタート</button>
+          <button type="button" class="sw-btn sw-lap-btn" id="swLapBtn" style="display:none">ラップ（25m）</button>
+          <div id="swStoppedActions" style="display:none">
+            <button type="button" class="sw-btn sw-record-btn" id="swRecordBtn">このタイムを記録する</button>
+            <div class="sw-row2">
+              <button type="button" class="sw-btn sw-reset-btn" id="swResetBtn">リセット</button>
+              <button type="button" class="sw-btn sw-resume-btn" id="swResumeBtn">▶ 再開</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="sw-save-panel" id="swSavePanel" style="display:none">
+          <div id="swSaveForm">
+            <p class="sw-save-time">記録するタイム：<b id="swSaveTime">0:00.00</b><br><span class="note" id="swSaveDate"></span></p>
+            <p class="sw-save-label">種目</p>
+            <div class="chip-group" id="swStrokeChips"></div>
+            <p class="sw-save-label">距離</p>
+            <div class="chip-group" id="swDistChips"></div>
+            <p class="sw-save-label" id="swCourseLabel" style="display:none">水路</p>
+            <div class="chip-group" id="swCourseChips" style="display:none"></div>
+            <p class="sw-save-label">種別</p>
+            <div class="seg" role="radiogroup" aria-label="種別">
+              <label><input type="radio" name="swKind" value="練習" checked /> 練習</label>
+              <label><input type="radio" name="swKind" value="大会" /> 大会</label>
+            </div>
+            <button type="button" class="btn btn-primary sw-save-btn" id="swSaveConfirmBtn">保存する</button>
+            <button type="button" class="btn btn-sub btn-block" id="swSaveCancelBtn" style="min-height:56px">やめる（測定に戻る）</button>
+          </div>
+          <div id="swSaveResult" style="display:none">
+            <div class="banner" id="swSaveResultBanner" role="status"></div>
+            <button type="button" class="btn btn-primary sw-save-btn" id="swSaveDoneBtn">測定に戻る</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sw-laps-scroll">
+        <div class="sw-laps" id="swLapsWrap" style="display:none">
+          <h3>ラップ一覧</h3>
+          <div class="sw-lap-head"><span>ラップ</span><span>ラップタイム</span><span class="r">累計タイム</span></div>
+          <div id="swLaps"></div>
+        </div>
+        <p class="sw-note">ラップを押すごとに25mとして数え、目安距離を表示します。<br>計測中は画面が消えにくくなります（対応ブラウザのみ）。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 一覧 -->
+  <section class="panel" id="panel-list">
+    <div class="filters">
+      <div>
+        <label class="f" for="fltStroke" style="margin-top:0">種目で絞り込み</label>
+        <select id="fltStroke">
+          <option value="">すべての種目</option>
+          <option>自由形</option>
+          <option>背泳ぎ</option>
+          <option>平泳ぎ</option>
+          <option>バタフライ</option>
+          <option>個人メドレー</option>
+        </select>
+      </div>
+      <div>
+        <label class="f" for="fltDistance" style="margin-top:0">距離で絞り込み</label>
+        <select id="fltDistance">
+          <option value="">すべての距離</option>
+          <option value="25">25m</option>
+          <option value="50">50m</option>
+          <option value="100">100m</option>
+          <option value="200">200m</option>
+        </select>
+      </div>
+    </div>
+    <p class="hint" id="listCount" style="margin:0 0 10px"></p>
+    <div id="listBody"></div>
+  </section>
+
+  <!-- 3. ベスト -->
+  <section class="panel" id="panel-best">
+    <div class="card">
+      <h2>自己ベスト一覧</h2>
+      <div id="bestBody"></div>
+    </div>
+  </section>
+
+  <!-- 4. グラフ -->
+  <section class="panel" id="panel-graph">
+    <div class="card">
+      <h2>タイムの推移</h2>
+      <div class="row2">
+        <div>
+          <label class="f" for="gStroke" style="margin-top:0">種目</label>
+          <select id="gStroke">
+            <option>自由形</option>
+            <option>背泳ぎ</option>
+            <option>平泳ぎ</option>
+            <option>バタフライ</option>
+            <option>個人メドレー</option>
+          </select>
+        </div>
+        <div>
+          <label class="f" for="gDistance" style="margin-top:0">距離</label>
+          <select id="gDistance">
+            <option value="25">25m</option>
+            <option value="50">50m</option>
+            <option value="100">100m</option>
+            <option value="200">200m</option>
           </select>
         </div>
       </div>
-      <label>タイム</label>
-      <div class="row">
-        <div><input type="number" id="fMin" min="0" max="59" placeholder="分" inputmode="numeric"></div>
-        <div><input type="number" id="fSec" min="0" max="59" placeholder="秒" inputmode="numeric"></div>
-        <div><input type="number" id="fCs" min="0" max="99" placeholder="1/100" inputmode="numeric"></div>
+      <div id="gCourseWrap" style="display:none">
+        <label class="f" for="gCourse">水路</label>
+        <select id="gCourse">
+          <option value="短水路">短水路（25mプール）</option>
+          <option value="長水路">長水路（50mプール）</option>
+        </select>
       </div>
-      <label>種類</label>
-      <select id="fKind">
-        <option value="練習">練習</option>
-        <option value="記録会">記録会</option>
-        <option value="大会">大会</option>
-      </select>
-      <label>メモ（任意）</label>
-      <input type="text" id="fMemo" placeholder="レッスン など">
-      <button class="btn" id="fAddBtn">記録を追加</button>
+      <div id="graphBody" style="margin-top:14px"></div>
     </div>
   </section>
 
-  <!-- 一覧 -->
-  <section id="tab-list">
-    <div id="listWrap"></div>
-  </section>
-
-  <!-- ベスト -->
-  <section id="tab-best">
+  <!-- 5. 設定 -->
+  <section class="panel" id="panel-settings">
     <div class="card">
-      <table class="best"><tbody id="bestBody"></tbody></table>
-      <div class="empty" id="bestEmpty" style="display:none">まだ記録がありません。</div>
-      <p class="hint">種目×距離ごとの自己ベストです。50m以上は短水路／長水路で分かれます。</p>
-    </div>
-  </section>
+      <h2>設定・データ管理</h2>
 
-  <!-- グラフ -->
-  <section id="tab-graph">
-    <div class="card">
-      <label>種目</label>
-      <select id="gStroke"></select>
-      <div class="row">
-        <div>
-          <label>距離</label>
-          <select id="gDistance"></select>
-        </div>
-        <div id="gCourseWrap">
-          <label>水路</label>
-          <select id="gCourse">
-            <option value="短水路">短水路（25m）</option>
-            <option value="長水路">長水路（50m）</option>
-          </select>
+      <div class="set-row">
+        <label class="f" for="sName" style="margin-top:0">子どもの名前（表示用）</label>
+        <p>画面の見出しに「○○さんのスイミング記録」と表示されます。</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <input type="text" id="sName" placeholder="例：はると" style="flex:1;min-width:160px" />
+          <button class="btn btn-sub" id="btnSaveName" type="button">名前を保存</button>
         </div>
       </div>
-      <div style="margin-top:16px"><canvas id="chart" width="640" height="400"></canvas></div>
-      <div class="empty" id="graphEmpty" style="display:none">この条件の記録がまだありません。</div>
-      <p class="hint">タイムの推移です。線が右上がり＝速くなっている、という見方です（上が速い）。</p>
+
+      <div class="set-row">
+        <h3 style="margin-top:0">バックアップ</h3>
+        <p>記録はこの端末のブラウザ内（localStorage）に保存されます。機種変更やブラウザのデータ消去に備えて、ときどき書き出しておくのがおすすめです。</p>
+        <div class="btn-grid">
+          <button class="btn btn-sub" id="btnExportJson" type="button">JSONで書き出す</button>
+          <label class="file-label" for="fileImport">JSONを読み込む</label>
+          <input type="file" id="fileImport" accept=".json,application/json" />
+          <button class="btn btn-sub" id="btnExportCsv" type="button">CSVで書き出す</button>
+        </div>
+        <p class="note" style="margin-top:10px">読み込むと、今の記録にファイルの記録が追加されます（まったく同じ記録は重複しません）。</p>
+      </div>
+
+      <div class="set-row">
+        <h3 style="margin-top:0">お試し・リセット</h3>
+        <p>サンプルデータは、自由形25mが少しずつ速くなる記録と平泳ぎ25mの記録です。不要になったら下の「全データ削除」や一覧の削除ボタンで消せます。</p>
+        <div class="btn-grid">
+          <button class="btn btn-sub" id="btnSample" type="button">サンプルデータを入れる</button>
+          <button class="btn btn-danger" id="btnDeleteAll" type="button">全データを削除</button>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- 設定 -->
-  <section id="tab-settings">
-    <div class="card">
-      <label>子どもの名前</label>
-      <input type="text" id="setName" placeholder="名前">
-      <button class="btn" id="setNameBtn">名前を保存</button>
-    </div>
-    <div class="card">
-      <label>データのバックアップ</label>
-      <button class="btn sub" id="exportBtn">書き出し（JSONファイル）</button>
-      <label style="margin-top:18px">データの読み込み</label>
-      <input type="file" id="importFile" accept=".json,application/json">
-      <p class="hint">読み込むと今の記録は、ファイルの内容で置き換わります。Muse版スイミング記録から書き出したJSONも読み込めます。</p>
-    </div>
-    <div class="card">
-      <label>危険な操作</label>
-      <button class="btn danger" id="wipeBtn">全データ削除</button>
-      <p class="hint">記録と名前をすべて消します。消す前に書き出しをおすすめします。</p>
-    </div>
-    <div class="card">
-      <p class="hint">このアプリ（PWA版）のデータは、このスマホの中（localStorage）に保存されます。記録の形式はMuse版スイミング記録と同じです。</p>
-    </div>
-  </section>
-</main>
+</div>
 
-<nav id="tabs">
-  <div class="inner">
-    <button data-tab="measure" aria-selected="true"><span class="ic">⏱</span>計測</button>
-    <button data-tab="record" aria-selected="false"><span class="ic">✎</span>記録</button>
-    <button data-tab="list" aria-selected="false"><span class="ic">☰</span>一覧</button>
-    <button data-tab="best" aria-selected="false"><span class="ic">★</span>ベスト</button>
-    <button data-tab="graph" aria-selected="false"><span class="ic">📈</span>グラフ</button>
-    <button data-tab="settings" aria-selected="false"><span class="ic">⚙</span>設定</button>
-  </div>
+<!-- bottom tab bar (thumb reach) -->
+<nav class="tabs" role="tablist" aria-label="画面切り替え">
+  <button class="tab-btn tab-btn-measure" role="tab" data-tab="measure" aria-selected="true"><span class="ticon" aria-hidden="true">⏱</span>測定</button>
+  <button class="tab-btn" role="tab" data-tab="record" aria-selected="false"><span class="ticon" aria-hidden="true">✎</span>記録</button>
+  <button class="tab-btn" role="tab" data-tab="list" aria-selected="false"><span class="ticon" aria-hidden="true">☰</span>一覧</button>
+  <button class="tab-btn" role="tab" data-tab="best" aria-selected="false"><span class="ticon" aria-hidden="true">★</span>ベスト</button>
+  <button class="tab-btn" role="tab" data-tab="graph" aria-selected="false"><span class="ticon" aria-hidden="true">📈</span>グラフ</button>
+  <button class="tab-btn" role="tab" data-tab="settings" aria-selected="false"><span class="ticon" aria-hidden="true">⚙</span>設定</button>
 </nav>
 
-<div id="toast"></div>
+<!-- confirm modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h3 id="modalTitle">確認</h3>
+    <p id="modalText"></p>
+    <div class="modal-btns">
+      <button class="btn btn-sub" id="modalCancel" type="button">キャンセル</button>
+      <button class="btn btn-danger" id="modalOk" type="button">削除する</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
 
 <script>
-"use strict";
-const STROKES = ["自由形", "背泳ぎ", "平泳ぎ", "バタフライ", "個人メドレー"];
-const DISTANCES = [25, 50, 100, 200];
-const LS_RECORDS = "suimingu_records_v1";
-const LS_NAME = "suimingu_child_name_v1";
-
-function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
-function todayISO() {
-  const d = new Date();
-  const p = (n) => String(n).padStart(2, "0");
-  return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
-}
-function fmt(sec) {
-  sec = Math.round(sec * 100) / 100;
-  const m = Math.floor(sec / 60);
-  const s = sec - m * 60;
-  const sStr = s.toFixed(2).padStart(5, "0");
-  return m > 0 ? m + ":" + sStr : sStr;
-}
-function fmtSW(ms) {
-  const cs = Math.floor(ms / 10);
-  const m = Math.floor(cs / 6000);
-  const s = Math.floor((cs % 6000) / 100);
-  const c = cs % 100;
-  return m + ":" + String(s).padStart(2, "0") + "." + String(c).padStart(2, "0");
-}
-function esc(t) {
-  return String(t == null ? "" : t).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
-}
-function keyOf(r) {
-  return r.stroke + "|" + Number(r.distance) + "|" + (Number(r.distance) >= 50 ? (r.course || "短水路") : "");
-}
-
-let records = [];
-try { records = JSON.parse(localStorage.getItem(LS_RECORDS)) || []; } catch (e) { records = []; }
-if (!Array.isArray(records)) records = [];
-let childName = localStorage.getItem(LS_NAME) || "";
-
-function saveRecords() {
-  try {
-    localStorage.setItem(LS_RECORDS, JSON.stringify(records));
-  } catch (e) {
-    alert("保存できませんでした。このブラウザで開いている場合は、ホーム画面に追加したアプリから開いてみてください。");
+(function(){
+  "use strict";
+  var LS_RECORDS = "suimingu_records_v1";
+  var LS_NAME = "suimingu_child_name_v1";
+  var STROKES = ["自由形","背泳ぎ","平泳ぎ","バタフライ","個人メドレー"];
+  var DISTANCES = [25,50,100,200];
+  var COURSES = ["短水路","長水路"];
+  function normCourse(r){
+    if(!r) return "短水路";
+    if(Number(r.distance) < 50) return "短水路";
+    return COURSES.indexOf(r.course) >= 0 ? r.course : "短水路";
   }
-}
-function toast(msg) {
-  const t = document.getElementById("toast");
-  t.textContent = msg;
-  t.classList.add("show");
-  setTimeout(() => t.classList.remove("show"), 2200);
-}
 
-/* ---------- 共通UI ---------- */
-function fillSelect(sel, items, fmtFn) {
-  sel.innerHTML = "";
-  for (const it of items) {
-    const o = document.createElement("option");
-    o.value = it;
-    o.textContent = fmtFn ? fmtFn(it) : it;
-    sel.appendChild(o);
+  var records = loadRecords();
+  var childName = loadName();
+
+  function loadRecords(){
+    try{
+      var raw = localStorage.getItem(LS_RECORDS);
+      if(!raw) return [];
+      var arr = JSON.parse(raw);
+      if(!Array.isArray(arr)) return [];
+      return arr.filter(validRecord).map(function(r){
+        if(!r.course) r.course = "短水路";
+        r.course = normCourse(r);
+        return r;
+      });
+    }catch(e){ return []; }
   }
-}
-const distLabel = (d) => d + "m";
-
-function bindCourse(distanceSel, wrap) {
-  const update = () => { wrap.style.display = Number(distanceSel.value) >= 50 ? "" : "none"; };
-  distanceSel.addEventListener("change", update);
-  update();
-}
-
-/* ---------- タブ ---------- */
-const tabBtns = document.querySelectorAll("nav#tabs button");
-tabBtns.forEach((b) => {
-  b.addEventListener("click", () => {
-    tabBtns.forEach((x) => x.setAttribute("aria-selected", x === b ? "true" : "false"));
-    document.querySelectorAll("main section").forEach((s) => s.classList.remove("active"));
-    document.getElementById("tab-" + b.dataset.tab).classList.add("active");
-    if (b.dataset.tab === "list") renderList();
-    if (b.dataset.tab === "best") renderBest();
-    if (b.dataset.tab === "graph") renderGraph();
-    window.scrollTo(0, 0);
-  });
-});
-
-/* ---------- 計測 ---------- */
-let swRunning = false, swStart = 0, swBase = 0, swTimer = null, swLaps = [];
-const swTime = document.getElementById("swTime");
-const swMainBtn = document.getElementById("swMainBtn");
-const swLapBtn = document.getElementById("swLapBtn");
-const swResetBtn = document.getElementById("swResetBtn");
-const lapList = document.getElementById("lapList");
-const savePanel = document.getElementById("savePanel");
-
-function swElapsed() { return swBase + (swRunning ? performance.now() - swStart : 0); }
-function swTick() { swTime.textContent = fmtSW(swElapsed()); }
-function renderLaps() {
-  lapList.innerHTML = "";
-  let prev = 0;
-  swLaps.forEach((lapMs, i) => {
-    const li = document.createElement("li");
-    const left = document.createElement("span");
-    left.textContent = "ラップ" + (i + 1);
-    const mid = document.createElement("span");
-    mid.className = "lapTime";
-    mid.textContent = fmtSW(lapMs - prev);
-    const right = document.createElement("span");
-    right.textContent = fmtSW(lapMs);
-    li.append(left, mid, right);
-    lapList.prepend(li);
-    prev = lapMs;
-  });
-}
-swMainBtn.addEventListener("click", () => {
-  if (!swRunning) {
-    swRunning = true;
-    swStart = performance.now();
-    swTimer = setInterval(swTick, 31);
-    swMainBtn.textContent = "ストップ";
-    swMainBtn.classList.add("running");
-    swLapBtn.disabled = false;
-    swResetBtn.disabled = true;
-    savePanel.style.display = "none";
-    document.getElementById("swSub").textContent = "計測中…";
-  } else {
-    swBase = swElapsed();
-    swRunning = false;
-    clearInterval(swTimer);
-    swTick();
-    swMainBtn.textContent = "スタート";
-    swMainBtn.classList.remove("running");
-    swLapBtn.disabled = true;
-    swResetBtn.disabled = false;
-    if (swBase > 0) {
-      savePanel.style.display = "";
-      document.getElementById("swSub").textContent = "とまったタイムは下の欄から保存できます";
-      setTimeout(() => savePanel.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
-    }
+  function validRecord(r){
+    return r && typeof r.id === "string" && typeof r.date === "string" &&
+      STROKES.indexOf(r.stroke) >= 0 && DISTANCES.indexOf(Number(r.distance)) >= 0 &&
+      typeof r.timeSec === "number" && isFinite(r.timeSec) && r.timeSec > 0;
   }
-});
-swLapBtn.addEventListener("click", () => {
-  if (!swRunning) return;
-  swLaps.push(swElapsed());
-  renderLaps();
-});
-swResetBtn.addEventListener("click", () => {
-  swBase = 0; swLaps = [];
-  swTick(); renderLaps();
-  swResetBtn.disabled = true;
-  savePanel.style.display = "none";
-});
-swTick();
-
-const svStroke = document.getElementById("svStroke");
-const svDistance = document.getElementById("svDistance");
-fillSelect(svStroke, STROKES);
-fillSelect(svDistance, DISTANCES, distLabel);
-bindCourse(svDistance, document.getElementById("svCourseWrap"));
-document.getElementById("svSaveBtn").addEventListener("click", () => {
-  const dist = Number(svDistance.value);
-  const rec = {
-    id: uid(),
-    date: todayISO(),
-    stroke: svStroke.value,
-    distance: dist,
-    course: dist >= 50 ? document.getElementById("svCourse").value : null,
-    timeSec: Math.round(swBase / 10) / 100,
-    kind: document.getElementById("svKind").value,
-    memo: document.getElementById("svMemo").value.trim()
-  };
-  if (!(rec.timeSec > 0)) { toast("タイムがありません"); return; }
-  records.push(rec);
-  saveRecords();
-  toast("保存しました：" + rec.stroke + " " + rec.distance + "m " + fmt(rec.timeSec));
-  savePanel.style.display = "none";
-  swBase = 0; swLaps = []; swTick(); renderLaps();
-  swResetBtn.disabled = true;
-});
-
-/* ---------- 記録（手入力） ---------- */
-const fStroke = document.getElementById("fStroke");
-const fDistance = document.getElementById("fDistance");
-fillSelect(fStroke, STROKES);
-fillSelect(fDistance, DISTANCES, distLabel);
-bindCourse(fDistance, document.getElementById("fCourseWrap"));
-document.getElementById("fDate").value = todayISO();
-document.getElementById("fAddBtn").addEventListener("click", () => {
-  const min = Number(document.getElementById("fMin").value) || 0;
-  const sec = Number(document.getElementById("fSec").value) || 0;
-  const cs = Number(document.getElementById("fCs").value) || 0;
-  const timeSec = Math.round((min * 60 + sec + cs / 100) * 100) / 100;
-  if (!(timeSec > 0)) { toast("タイムを入れてください"); return; }
-  const date = document.getElementById("fDate").value || todayISO();
-  const dist = Number(fDistance.value);
-  records.push({
-    id: uid(),
-    date: date,
-    stroke: fStroke.value,
-    distance: dist,
-    course: dist >= 50 ? document.getElementById("fCourse").value : null,
-    timeSec: timeSec,
-    kind: document.getElementById("fKind").value,
-    memo: document.getElementById("fMemo").value.trim()
-  });
-  saveRecords();
-  toast("記録を追加しました");
-  document.getElementById("fMin").value = "";
-  document.getElementById("fSec").value = "";
-  document.getElementById("fCs").value = "";
-  document.getElementById("fMemo").value = "";
-});
-
-/* ---------- 一覧 ---------- */
-function bestMap() {
-  const map = {};
-  for (const r of records) {
-    const k = keyOf(r);
-    if (!map[k] || r.timeSec < map[k].timeSec) map[k] = r;
+  function saveRecords(){
+    try{ localStorage.setItem(LS_RECORDS, JSON.stringify(records)); }catch(e){}
   }
-  return map;
-}
-function renderList() {
-  const wrap = document.getElementById("listWrap");
-  if (!records.length) {
-    wrap.innerHTML = '<div class="empty">まだ記録がありません。<br>「計測」で測るか、「記録」から手入力できます。</div>';
-    return;
+  function loadName(){
+    try{
+      var n = localStorage.getItem(LS_NAME);
+      return (n && n.trim()) ? n.trim() : "お子さん";
+    }catch(e){ return "お子さん"; }
   }
-  const bests = bestMap();
-  const sorted = records.slice().sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
-  wrap.innerHTML = "";
-  for (const r of sorted) {
-    const div = document.createElement("div");
-    div.className = "recItem";
-    const isPB = bests[keyOf(r)] && bests[keyOf(r)].id === r.id;
-    const courseTxt = Number(r.distance) >= 50 ? "・" + (r.course || "短水路") : "";
-    div.innerHTML =
-      '<div class="top"><span class="what"></span><span class="time"></span></div>' +
-      '<div class="meta"></div>' +
-      '<button class="del">この記録を削除</button>';
-    div.querySelector(".what").textContent = r.stroke + " " + r.distance + "m" + courseTxt + (isPB ? "" : "");
-    if (isPB) {
-      const badge = document.createElement("span");
-      badge.className = "pb";
-      badge.textContent = "ベスト";
-      div.querySelector(".what").appendChild(badge);
-    }
-    div.querySelector(".time").textContent = fmt(r.timeSec);
-    div.querySelector(".meta").textContent = r.date + " ・ " + (r.kind || "練習") + (r.memo ? " ・ " + r.memo : "");
-    div.querySelector(".del").addEventListener("click", () => {
-      if (!confirm("この記録を削除しますか？")) return;
-      records = records.filter((x) => x.id !== r.id);
-      saveRecords();
-      renderList();
-      toast("削除しました");
+  function saveName(){
+    try{ localStorage.setItem(LS_NAME, childName); }catch(e){}
+  }
+  function uid(){
+    return "r" + Date.now().toString(36) + Math.random().toString(36).slice(2,9);
+  }
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
     });
-    wrap.appendChild(div);
   }
-}
-
-/* ---------- ベスト ---------- */
-function renderBest() {
-  const body = document.getElementById("bestBody");
-  const empty = document.getElementById("bestEmpty");
-  const bests = bestMap();
-  const keys = Object.keys(bests).sort((ka, kb) => {
-    const a = bests[ka], b = bests[kb];
-    const si = STROKES.indexOf(a.stroke) - STROKES.indexOf(b.stroke);
-    if (si !== 0) return si;
-    const di = Number(a.distance) - Number(b.distance);
-    if (di !== 0) return di;
-    return String(a.course || "") < String(b.course || "") ? -1 : 1;
-  });
-  body.innerHTML = "";
-  empty.style.display = keys.length ? "none" : "";
-  for (const k of keys) {
-    const r = bests[k];
-    const tr = document.createElement("tr");
-    const courseTxt = Number(r.distance) >= 50 ? " " + (r.course || "短水路") : "";
-    tr.innerHTML = "<td></td><td class='t'></td><td class='d'></td>";
-    tr.children[0].textContent = r.stroke + " " + r.distance + "m" + courseTxt;
-    tr.children[1].textContent = fmt(r.timeSec);
-    tr.children[2].textContent = r.date;
-    body.appendChild(tr);
+  function keyOf(stroke, distance, course){
+    var d = Number(distance);
+    if(d >= 50) return stroke + "|" + d + "|" + (COURSES.indexOf(course) >= 0 ? course : "短水路");
+    return stroke + "|" + d;
   }
-}
-
-/* ---------- グラフ ---------- */
-const gStroke = document.getElementById("gStroke");
-const gDistance = document.getElementById("gDistance");
-fillSelect(gStroke, STROKES);
-fillSelect(gDistance, DISTANCES, distLabel);
-bindCourse(gDistance, document.getElementById("gCourseWrap"));
-[gStroke, gDistance, document.getElementById("gCourse")].forEach((el) => el.addEventListener("change", renderGraph));
-
-function renderGraph() {
-  const canvas = document.getElementById("chart");
-  const empty = document.getElementById("graphEmpty");
-  const dist = Number(gDistance.value);
-  const course = document.getElementById("gCourse").value;
-  const pts = records
-    .filter((r) => r.stroke === gStroke.value && Number(r.distance) === dist && (dist < 50 || (r.course || "短水路") === course))
-    .slice()
-    .sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
-  const ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  if (!pts.length) { empty.style.display = ""; canvas.style.display = "none"; return; }
-  empty.style.display = "none";
-  canvas.style.display = "";
-  const W = canvas.width, H = canvas.height;
-  const padL = 64, padR = 18, padT = 18, padB = 38;
-  const times = pts.map((p) => p.timeSec);
-  let tMin = Math.min.apply(null, times), tMax = Math.max.apply(null, times);
-  if (tMax - tMin < 1) { tMax += 0.5; tMin -= 0.5; }
-  const pad = (tMax - tMin) * 0.15;
-  tMax += pad; tMin -= pad;
-  const x = (i) => padL + (pts.length === 1 ? (W - padL - padR) / 2 : (i / (pts.length - 1)) * (W - padL - padR));
-  const y = (t) => padT + ((t - tMin) / (tMax - tMin)) * (H - padT - padB);
-  ctx.strokeStyle = "#bae6fd"; ctx.fillStyle = "#64748b"; ctx.font = "20px sans-serif"; ctx.lineWidth = 1;
-  for (let i = 0; i <= 3; i++) {
-    const tv = tMin + ((tMax - tMin) * i) / 3;
-    const yy = y(tv);
-    ctx.beginPath(); ctx.moveTo(padL, yy); ctx.lineTo(W - padR, yy); ctx.stroke();
-    ctx.fillText(fmt(tv), 6, yy + 7);
+  function labelOf(stroke, distance, course){
+    var d = Number(distance);
+    if(d >= 50) return stroke + " " + d + "m（" + (COURSES.indexOf(course) >= 0 ? course : "短水路") + "）";
+    return stroke + " " + d + "m";
   }
-  ctx.fillText(pts[0].date.slice(5), padL, H - 10);
-  if (pts.length > 1) {
-    const last = pts[pts.length - 1].date.slice(5);
-    ctx.fillText(last, W - padR - ctx.measureText(last).width, H - 10);
-  }
-  ctx.strokeStyle = "#0284c7"; ctx.lineWidth = 3; ctx.beginPath();
-  pts.forEach((p, i) => { const xx = x(i), yy = y(p.timeSec); if (i === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy); });
-  ctx.stroke();
-  let bestIdx = 0;
-  pts.forEach((p, i) => { if (p.timeSec < pts[bestIdx].timeSec) bestIdx = i; });
-  pts.forEach((p, i) => {
-    ctx.beginPath();
-    ctx.fillStyle = i === bestIdx ? "#f59e0b" : "#0284c7";
-    ctx.arc(x(i), y(p.timeSec), i === bestIdx ? 7 : 5, 0, Math.PI * 2);
-    ctx.fill();
-  });
-  ctx.fillStyle = "#0c4a6e"; ctx.font = "bold 20px sans-serif";
-  ctx.fillText("ベスト " + fmt(pts[bestIdx].timeSec), padL, padT + 4);
-}
 
-/* ---------- 設定 ---------- */
-const whoLabel = document.getElementById("whoLabel");
-const setName = document.getElementById("setName");
-function renderName() {
-  whoLabel.textContent = childName ? childName + " さん" : "";
-  setName.value = childName;
-}
-renderName();
-document.getElementById("setNameBtn").addEventListener("click", () => {
-  childName = setName.value.trim();
-  localStorage.setItem(LS_NAME, childName);
-  renderName();
-  toast("名前を保存しました");
-});
-document.getElementById("exportBtn").addEventListener("click", () => {
-  const data = JSON.stringify({ childName: childName, records: records }, null, 2);
-  const blob = new Blob([data], { type: "application/json" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "suimingu-records-" + todayISO() + ".json";
-  a.click();
-  setTimeout(() => URL.revokeObjectURL(a.href), 3000);
-  toast("書き出しました");
-});
-document.getElementById("importFile").addEventListener("change", (ev) => {
-  const file = ev.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = () => {
-    try {
-      const parsed = JSON.parse(reader.result);
-      const arr = Array.isArray(parsed) ? parsed : parsed.records;
-      if (!Array.isArray(arr)) throw new Error("bad format");
-      const clean = [];
-      for (const r of arr) {
-        if (!r || STROKES.indexOf(r.stroke) < 0 || DISTANCES.indexOf(Number(r.distance)) < 0) continue;
-        if (typeof r.timeSec !== "number" || !isFinite(r.timeSec) || !(r.timeSec > 0)) continue;
-        if (typeof r.date !== "string") continue;
-        const dist = Number(r.distance);
-        clean.push({
-          id: r.id ? String(r.id) : uid(),
-          date: r.date,
-          stroke: r.stroke,
-          distance: dist,
-          course: dist >= 50 ? (r.course === "長水路" ? "長水路" : "短水路") : null,
-          timeSec: r.timeSec,
-          kind: ["練習", "記録会", "大会"].indexOf(r.kind) >= 0 ? r.kind : "練習",
-          memo: r.memo ? String(r.memo) : ""
-        });
-      }
-      if (!confirm("読み込むと今の記録（" + records.length + "件）は、ファイルの記録（" + clean.length + "件）で置き換わります。よろしいですか？")) return;
-      records = clean;
-      if (parsed && typeof parsed.childName === "string") {
-        childName = parsed.childName;
-        localStorage.setItem(LS_NAME, childName);
-        renderName();
-      }
-      saveRecords();
-      toast("読み込みました：" + clean.length + "件");
-    } catch (e) {
-      alert("読み込めませんでした。JSONファイルを確認してください。");
+  /* ---- time parse / format ---- */
+  function normalizeInput(s){
+    return String(s).trim()
+      .replace(/[０-９]/g, function(c){ return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
+      .replace(/：/g, ":").replace(/．/g, ".").replace(/。/g, ".")
+      .replace(/\s+/g, "");
+  }
+  function parseTime(str){
+    var s = normalizeInput(str);
+    if(!s) return { ok:false, msg:"タイムを入力してください。" };
+    var total;
+    if(s.indexOf(":") >= 0){
+      var parts = s.split(":");
+      if(parts.length !== 2) return { ok:false, msg:"「1:23.45」の形で入力してください。" };
+      if(!/^\d+$/.test(parts[0])) return { ok:false, msg:"分の部分は数字で入力してください。" };
+      if(!/^\d+(\.\d+)?$/.test(parts[1])) return { ok:false, msg:"秒の部分は数字で入力してください（例：23.45）。" };
+      var min = parseInt(parts[0], 10);
+      var sec = parseFloat(parts[1]);
+      if(sec >= 60) return { ok:false, msg:"「:」の後の秒は60未満にしてください。" };
+      total = min * 60 + sec;
+    } else {
+      if(!/^\d+(\.\d+)?$/.test(s)) return { ok:false, msg:"数字で入力してください（例：45.32 ／ 1:23.45）。" };
+      total = parseFloat(s);
     }
-    ev.target.value = "";
-  };
-  reader.readAsText(file);
-});
-document.getElementById("wipeBtn").addEventListener("click", () => {
-  if (!confirm("記録と名前をすべて削除します。本当によろしいですか？")) return;
-  records = [];
-  childName = "";
-  localStorage.removeItem(LS_RECORDS);
-  localStorage.removeItem(LS_NAME);
-  renderName();
-  toast("全データ削除しました");
-});
+    if(!isFinite(total) || total <= 0) return { ok:false, msg:"0より大きいタイムを入力してください。" };
+    if(total >= 3600) return { ok:false, msg:"タイムが長すぎます。入力を確認してください。" };
+    total = Math.round(total * 100) / 100;
+    return { ok:true, sec: total };
+  }
+  function formatTime(sec){
+    var min = Math.floor(sec / 60);
+    var rest = sec - min * 60;
+    var restStr = rest.toFixed(2);
+    if(rest < 10) restStr = "0" + restStr;
+    if(min > 0) return min + ":" + restStr;
+    return rest.toFixed(2);
+  }
+  function formatDateJP(iso){
+    var p = String(iso).split("-");
+    if(p.length !== 3) return iso;
+    return Number(p[0]) + "/" + Number(p[1]) + "/" + Number(p[2]);
+  }
+  function todayISO(){
+    var d = new Date();
+    var m = String(d.getMonth()+1).padStart(2,"0");
+    var day = String(d.getDate()).padStart(2,"0");
+    return d.getFullYear() + "-" + m + "-" + day;
+  }
+  function daysAgoISO(n){
+    var d = new Date();
+    d.setDate(d.getDate() - n);
+    var m = String(d.getMonth()+1).padStart(2,"0");
+    var day = String(d.getDate()).padStart(2,"0");
+    return d.getFullYear() + "-" + m + "-" + day;
+  }
 
+  /* ---- best map ---- */
+  function bestMap(){
+    var map = {};
+    records.forEach(function(r){
+      var k = keyOf(r.stroke, r.distance, normCourse(r));
+      if(!map[k] || r.timeSec < map[k].timeSec) map[k] = r;
+    });
+    return map;
+  }
+  function isPB(r, map){
+    var b = map[keyOf(r.stroke, r.distance, normCourse(r))];
+    return !!b && b.id === r.id;
+  }
+
+  /* ---- add a record (shared by the record form and the stopwatch quick-save) ---- */
+  function addRecord(data){
+    var courseVal = (Number(data.distance) >= 50 && data.course === "長水路") ? "長水路" : "短水路";
+    var prevBest = bestMap()[keyOf(data.stroke, data.distance, courseVal)] || null;
+    var rec = {
+      id: uid(),
+      date: data.date,
+      stroke: data.stroke,
+      distance: Number(data.distance),
+      course: courseVal,
+      timeSec: data.timeSec,
+      kind: data.kind === "大会" ? "大会" : "練習",
+      memo: data.memo || ""
+    };
+    records.push(rec);
+    saveRecords();
+    renderHeader();
+    return {
+      rec: rec,
+      prevBest: prevBest,
+      beatBest: !!prevBest && rec.timeSec < prevBest.timeSec,
+      isFirst: !prevBest
+    };
+  }
+
+  /* ---- toast ---- */
+  var toastTimer = null;
+  function toast(msg){
+    var t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    if(toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 2600);
+  }
+
+  /* ---- confirm modal ---- */
+  var modalCb = null;
+  function openConfirm(title, text, okLabel, cb){
+    document.getElementById("modalTitle").textContent = title;
+    document.getElementById("modalText").textContent = text;
+    document.getElementById("modalOk").textContent = okLabel;
+    modalCb = cb;
+    document.getElementById("modalOverlay").classList.add("open");
+  }
+  function closeConfirm(){
+    document.getElementById("modalOverlay").classList.remove("open");
+    modalCb = null;
+  }
+  document.getElementById("modalCancel").addEventListener("click", closeConfirm);
+  document.getElementById("modalOverlay").addEventListener("click", function(e){
+    if(e.target === this) closeConfirm();
+  });
+  document.getElementById("modalOk").addEventListener("click", function(){
+    var cb = modalCb; closeConfirm();
+    if(cb) cb();
+  });
+
+  /* ---- tabs ---- */
+  var tabBtns = Array.prototype.slice.call(document.querySelectorAll(".tab-btn"));
+  function switchTab(name){
+    document.body.classList.toggle("is-measure", name === "measure");
+    tabBtns.forEach(function(b){ b.setAttribute("aria-selected", b.dataset.tab === name ? "true" : "false"); });
+    ["record","measure","list","best","graph","settings"].forEach(function(n){
+      document.getElementById("panel-" + n).classList.toggle("active", n === name);
+    });
+    if(name === "list") renderList();
+    if(name === "best") renderBest();
+    if(name === "graph") renderGraph();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  tabBtns.forEach(function(b){
+    b.addEventListener("click", function(){ switchTab(b.dataset.tab); });
+  });
+
+
+  /* ---- header ---- */
+  function renderHeader(){
+    document.getElementById("childTitle").textContent = childName;
+    document.getElementById("statTotal").textContent = records.length;
+    var kinds = {};
+    records.forEach(function(r){ kinds[keyOf(r.stroke, r.distance, normCourse(r))] = true; });
+    document.getElementById("statKinds").textContent = Object.keys(kinds).length;
+    var latest = "—";
+    if(records.length){
+      var sorted = records.slice().sort(function(a,b){ return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0); });
+      latest = formatDateJP(sorted[0].date);
+    }
+    document.getElementById("statLatest").textContent = latest;
+  }
+
+  /* ---- record form ---- */
+  var fDate = document.getElementById("fDate");
+  var fStroke = document.getElementById("fStroke");
+  var fDistance = document.getElementById("fDistance");
+  var fTime = document.getElementById("fTime");
+  var fMemo = document.getElementById("fMemo");
+  var preview = document.getElementById("timePreview");
+  var fCourseWrap = document.getElementById("fCourseWrap");
+  function updateCourseVisibility(){
+    fCourseWrap.style.display = Number(fDistance.value) >= 50 ? "" : "none";
+  }
+  fDistance.addEventListener("change", updateCourseVisibility);
+  updateCourseVisibility();
+  fDate.value = todayISO();
+
+  function updatePreview(){
+    var v = fTime.value;
+    if(!normalizeInput(v)){
+      preview.className = "preview"; preview.innerHTML = "";
+      return;
+    }
+    var p = parseTime(v);
+    if(p.ok){
+      preview.className = "preview show ok";
+      preview.innerHTML = "保存されるタイム： <b>" + esc(formatTime(p.sec)) + "</b>（" + p.sec.toFixed(2) + "秒）";
+    } else {
+      preview.className = "preview show err";
+      preview.textContent = p.msg;
+    }
+  }
+  fTime.addEventListener("input", updatePreview);
+  fTime.addEventListener("blur", updatePreview);
+
+  document.getElementById("recordForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var banner = document.getElementById("saveBanner");
+    banner.className = "banner"; banner.innerHTML = "";
+
+    if(!fDate.value){
+      preview.className = "preview show err";
+      preview.textContent = "日付を選んでください。";
+      fDate.focus();
+      return;
+    }
+    var p = parseTime(fTime.value);
+    if(!p.ok){
+      preview.className = "preview show err";
+      preview.textContent = p.msg;
+      fTime.focus();
+      return;
+    }
+    var stroke = fStroke.value;
+    var distance = Number(fDistance.value);
+    var kindEl = document.querySelector('input[name="kind"]:checked');
+    var kind = kindEl ? kindEl.value : "練習";
+    var courseEl = document.querySelector('input[name="course"]:checked');
+    var course = (distance >= 50 && courseEl) ? courseEl.value : "短水路";
+
+    var res = addRecord({ date: fDate.value, stroke: stroke, distance: distance, course: course, timeSec: p.sec, kind: kind, memo: fMemo.value.trim() });
+    var prevBest = res.prevBest;
+    var beatBest = res.beatBest;
+
+    if(beatBest){
+      banner.className = "banner show pb";
+      banner.innerHTML = "<span class='big'>🎉 ベスト更新！</span><br>" +
+        esc(labelOf(stroke, distance, course)) + "　" + esc(formatTime(prevBest.timeSec)) + " → <b>" + esc(formatTime(p.sec)) + "</b>（" +
+        (prevBest.timeSec - p.sec).toFixed(2) + "秒速くなりました）";
+    } else if(!prevBest){
+      banner.className = "banner show ok";
+      banner.textContent = "保存しました。 " + labelOf(stroke, distance, course) + " の最初の記録です（自己ベスト）。";
+    } else {
+      banner.className = "banner show ok";
+      banner.textContent = "保存しました。 " + labelOf(stroke, distance, course) + "：" + formatTime(p.sec) + "（ベストは " + formatTime(prevBest.timeSec) + "）";
+    }
+    fTime.value = "";
+    fMemo.value = "";
+    preview.className = "preview"; preview.innerHTML = "";
+    banner.scrollIntoView({ behavior:"smooth", block:"center" });
+  });
+
+  /* ---- list ---- */
+  var fltStroke = document.getElementById("fltStroke");
+  var fltDistance = document.getElementById("fltDistance");
+  fltStroke.addEventListener("change", renderList);
+  fltDistance.addEventListener("change", renderList);
+
+  function renderList(){
+    var body = document.getElementById("listBody");
+    var map = bestMap();
+    var items = records.filter(function(r){
+      if(fltStroke.value && r.stroke !== fltStroke.value) return false;
+      if(fltDistance.value && Number(r.distance) !== Number(fltDistance.value)) return false;
+      return true;
+    }).sort(function(a,b){
+      if(a.date !== b.date) return a.date < b.date ? 1 : -1;
+      return a.id < b.id ? 1 : -1;
+    });
+    document.getElementById("listCount").textContent =
+      items.length + "件の記録" + (records.length !== items.length ? "（全" + records.length + "件中）" : "");
+
+    if(!items.length){
+      body.innerHTML = "<div class='empty'>まだ記録がありません。<br>「記録する」タブから最初のタイムを入れてみましょう。</div>";
+      return;
+    }
+    body.innerHTML = items.map(function(r){
+      var pb = isPB(r, map);
+      return "<article class='rec'>" +
+        "<div class='rec-main'>" +
+          "<div class='rec-top'>" +
+            "<span class='rec-date'>" + esc(formatDateJP(r.date)) + "</span>" +
+            "<span class='badge " + (r.kind === "大会" ? "badge-kind-meet" : "badge-kind-practice") + "'>" + esc(r.kind) + "</span>" +
+            (Number(r.distance) >= 50 ? "<span class='badge badge-course'>" + esc(normCourse(r)) + "</span>" : "") +
+            (pb ? "<span class='badge badge-pb'>PB 自己ベスト</span>" : "") +
+          "</div>" +
+          "<div class='rec-title'>" + esc(r.stroke) + " " + Number(r.distance) + "m</div>" +
+          "<div class='rec-time'>" + esc(formatTime(r.timeSec)) + "</div>" +
+          (r.memo ? "<div class='rec-memo'>" + esc(r.memo) + "</div>" : "") +
+        "</div>" +
+        "<button type='button' class='del-btn' data-del='" + esc(r.id) + "'>削除</button>" +
+      "</article>";
+    }).join("");
+
+    Array.prototype.forEach.call(body.querySelectorAll("[data-del]"), function(btn){
+      btn.addEventListener("click", function(){
+        var id = btn.getAttribute("data-del");
+        var rec = records.filter(function(r){ return r.id === id; })[0];
+        if(!rec) return;
+        openConfirm("記録を削除しますか？",
+          formatDateJP(rec.date) + "　" + labelOf(rec.stroke, rec.distance, normCourse(rec)) + "　" + formatTime(rec.timeSec) + "\nこの記録を削除します。元に戻せません。",
+          "削除する",
+          function(){
+            records = records.filter(function(r){ return r.id !== id; });
+            saveRecords(); renderHeader(); renderList();
+            toast("記録を削除しました");
+          });
+      });
+    });
+  }
+
+  /* ---- best ---- */
+  function renderBest(){
+    var body = document.getElementById("bestBody");
+    var map = bestMap();
+    var keys = Object.keys(map);
+    if(!keys.length){
+      body.innerHTML = "<div class='empty'>まだ記録がありません。<br>記録がたまると、種目×距離ごとのベストがここに並びます。</div>";
+      return;
+    }
+    keys.sort(function(a,b){
+      var pa = a.split("|"), pb = b.split("|");
+      var si = STROKES.indexOf(pa[0]) - STROKES.indexOf(pb[0]);
+      if(si !== 0) return si;
+      var di = Number(pa[1]) - Number(pb[1]);
+      if(di !== 0) return di;
+      return String(pa[2] || "").localeCompare(String(pb[2] || ""));
+    });
+    body.innerHTML = keys.map(function(k){
+      var b = map[k];
+      var count = records.filter(function(r){ return keyOf(r.stroke, r.distance, normCourse(r)) === k; }).length;
+      return "<div class='best-item'>" +
+        "<div><div class='name'>" + esc(labelOf(b.stroke, b.distance, normCourse(b))) + "</div>" +
+        "<div class='meta'>達成日：" + esc(formatDateJP(b.date)) + "（" + esc(b.kind) + "）／ 記録 " + count + "件</div></div>" +
+        "<div class='time'>" + esc(formatTime(b.timeSec)) + "<small>" + b.timeSec.toFixed(2) + "秒</small></div>" +
+      "</div>";
+    }).join("");
+  }
+
+  /* ---- graph ---- */
+  var gStroke = document.getElementById("gStroke");
+  var gDistance = document.getElementById("gDistance");
+  var gCourse = document.getElementById("gCourse");
+  var gCourseWrap = document.getElementById("gCourseWrap");
+  gStroke.addEventListener("change", renderGraph);
+  gDistance.addEventListener("change", renderGraph);
+  gCourse.addEventListener("change", renderGraph);
+
+  function renderGraph(){
+    var body = document.getElementById("graphBody");
+    var isLongDist = Number(gDistance.value) >= 50;
+    gCourseWrap.style.display = isLongDist ? "" : "none";
+    var items = records.filter(function(r){
+      if(!(r.stroke === gStroke.value && Number(r.distance) === Number(gDistance.value))) return false;
+      if(isLongDist && normCourse(r) !== gCourse.value) return false;
+      return true;
+    }).sort(function(a,b){
+      if(a.date !== b.date) return a.date < b.date ? -1 : 1;
+      return a.id < b.id ? -1 : 1;
+    });
+
+    if(!items.length){
+      body.innerHTML = "<div class='empty'>" + esc(labelOf(gStroke.value, gDistance.value, isLongDist ? gCourse.value : "短水路")) + " の記録はまだありません。</div>";
+      return;
+    }
+
+    var best = items.reduce(function(m, r){ return r.timeSec < m.timeSec ? r : m; }, items[0]);
+    var latest = items[items.length - 1];
+    var first = items[0];
+    var diff = first.timeSec - latest.timeSec;
+
+    var statsHtml = "<div class='g-stats'>" +
+      "<div class='stat'><b>" + items.length + "</b><span>記録の数</span></div>" +
+      "<div class='stat'><b>" + esc(formatTime(best.timeSec)) + "</b><span>ベスト</span></div>" +
+      "<div class='stat'><b>" + (diff > 0 ? "−" + diff.toFixed(2) + "秒" : diff < 0 ? "+" + Math.abs(diff).toFixed(2) + "秒" : "±0秒") + "</b><span>初回→最新</span></div>" +
+    "</div>";
+
+    if(items.length === 1){
+      body.innerHTML = "<div class='empty'>記録が1件だけなので、グラフは2件目から表示されます。<br>" +
+        esc(formatDateJP(items[0].date)) + "：" + esc(formatTime(items[0].timeSec)) + "</div>" + statsHtml;
+      return;
+    }
+
+    var W = 640, H = 320, PL = 62, PR = 16, PT = 18, PB = 42;
+    var pw = W - PL - PR, ph = H - PT - PB;
+    var times = items.map(function(r){ return r.timeSec; });
+    var tMin = Math.min.apply(null, times), tMax = Math.max.apply(null, times);
+    var range = tMax - tMin;
+    var pad = range === 0 ? 1 : range * 0.15;
+    var yMin = tMin - pad, yMax = tMax + pad;
+
+    function X(i){ return PL + (items.length === 1 ? pw/2 : (i / (items.length - 1)) * pw); }
+    function Y(t){ return PT + ((t - yMin) / (yMax - yMin)) * ph; } /* 小さいタイムほど上 */
+
+    var grid = "";
+    var ticks = 4;
+    for(var i = 0; i <= ticks; i++){
+      var tv = yMin + (yMax - yMin) * (i / ticks);
+      var y = Y(tv);
+      grid += "<line x1='" + PL + "' y1='" + y.toFixed(1) + "' x2='" + (W - PR) + "' y2='" + y.toFixed(1) + "' stroke='var(--line)' stroke-width='1'/>" +
+        "<text x='" + (PL - 8) + "' y='" + (y + 4).toFixed(1) + "' text-anchor='end' font-size='12' fill='var(--muted)'>" + esc(formatTime(Math.round(tv*100)/100)) + "</text>";
+    }
+    var step = Math.max(1, Math.ceil(items.length / 6));
+    var xlabels = "";
+    items.forEach(function(r, idx){
+      if(idx % step !== 0 && idx !== items.length - 1) return;
+      var p = r.date.split("-");
+      var label = Number(p[1]) + "/" + Number(p[2]);
+      xlabels += "<text x='" + X(idx).toFixed(1) + "' y='" + (H - 14) + "' text-anchor='middle' font-size='12' fill='var(--muted)'>" + label + "</text>";
+    });
+    var pts = items.map(function(r, idx){ return X(idx).toFixed(1) + "," + Y(r.timeSec).toFixed(1); }).join(" ");
+    var circles = items.map(function(r, idx){
+      var isBest = r.id === best.id;
+      var bx = X(idx);
+      var anchor = bx > W - 110 ? "end" : (bx < PL + 60 ? "start" : "middle");
+      return "<circle cx='" + bx.toFixed(1) + "' cy='" + Y(r.timeSec).toFixed(1) + "' r='" + (isBest ? 7 : 5) + "' fill='" + (isBest ? "#f59e0b" : "#0284c7") + "' stroke='#fff' stroke-width='2'><title>" + esc(formatDateJP(r.date)) + " " + esc(formatTime(r.timeSec)) + "</title></circle>" +
+        (isBest ? "<text x='" + bx.toFixed(1) + "' y='" + (Y(r.timeSec) - 13).toFixed(1) + "' text-anchor='" + anchor + "' font-size='12' font-weight='700' fill='#d97706'>ベスト " + esc(formatTime(r.timeSec)) + "</text>" : "");
+    }).join("");
+
+    body.innerHTML =
+      "<div class='graph-box'><svg viewBox='0 0 " + W + " " + H + "' role='img' aria-label='" + esc(labelOf(gStroke.value, gDistance.value, isLongDist ? gCourse.value : "短水路")) + "のタイム推移グラフ'>" +
+        grid + xlabels +
+        "<polyline points='" + pts + "' fill='none' stroke='#0284c7' stroke-width='3' stroke-linejoin='round' stroke-linecap='round'/>" +
+        circles +
+      "</svg></div>" +
+      "<div class='legend'><span><span class='dot' style='background:#0284c7'></span>記録</span><span><span class='dot' style='background:#f59e0b'></span>自己ベスト</span><span>上にあるほど速いタイムです</span></div>" +
+      statsHtml;
+  }
+
+  /* ---- stopwatch ---- */
+  var swTimeEl = document.getElementById("swTime");
+  var swStatusEl = document.getElementById("swStatus");
+  var swDistEl = document.getElementById("swDist");
+  var swMainBtn = document.getElementById("swMainBtn");
+  var swLapBtn = document.getElementById("swLapBtn");
+  var swResetBtn = document.getElementById("swResetBtn");
+  var swRecordBtn = document.getElementById("swRecordBtn");
+  var swResumeBtn = document.getElementById("swResumeBtn");
+  var swStoppedActions = document.getElementById("swStoppedActions");
+  var swControls = document.getElementById("swControls");
+  var swSavePanel = document.getElementById("swSavePanel");
+  var swSaveForm = document.getElementById("swSaveForm");
+  var swSaveResult = document.getElementById("swSaveResult");
+  var swSaveResultBanner = document.getElementById("swSaveResultBanner");
+  var swSaveTimeEl = document.getElementById("swSaveTime");
+  var swSaveDateEl = document.getElementById("swSaveDate");
+  var swStrokeChips = document.getElementById("swStrokeChips");
+  var swDistChips = document.getElementById("swDistChips");
+  var swSaveConfirmBtn = document.getElementById("swSaveConfirmBtn");
+  var swSaveCancelBtn = document.getElementById("swSaveCancelBtn");
+  var swSaveDoneBtn = document.getElementById("swSaveDoneBtn");
+  var swLapsWrap = document.getElementById("swLapsWrap");
+  var swLapsEl = document.getElementById("swLaps");
+
+  var swState = "idle"; /* idle | running | stopped */
+  var swStartStamp = 0;
+  var swElapsedBase = 0;
+  var swRaf = null;
+  var swLaps = []; /* cumulative ms */
+  var swWakeLock = null;
+
+  function swCurrentMs(){
+    if(swState === "running") return swElapsedBase + (performance.now() - swStartStamp);
+    return swElapsedBase;
+  }
+  function formatSW(ms){
+    var totalCs = Math.floor(Math.max(0, ms) / 10);
+    var min = Math.floor(totalCs / 6000);
+    var sec = Math.floor(totalCs / 100) % 60;
+    var cs = totalCs % 100;
+    return min + ":" + String(sec).padStart(2,"0") + "." + String(cs).padStart(2,"0");
+  }
+  function swTick(){
+    swTimeEl.textContent = formatSW(swCurrentMs());
+    if(swState === "running") swRaf = requestAnimationFrame(swTick);
+  }
+  function swStartLoop(){
+    if(swRaf) cancelAnimationFrame(swRaf);
+    swRaf = requestAnimationFrame(swTick);
+  }
+  function swStopLoop(){
+    if(swRaf) cancelAnimationFrame(swRaf);
+    swRaf = null;
+    swTimeEl.textContent = formatSW(swCurrentMs());
+  }
+  function swRequestWakeLock(){
+    try{
+      if(navigator.wakeLock && navigator.wakeLock.request){
+        var p = navigator.wakeLock.request("screen");
+        if(p && p.then){
+          p.then(function(lock){
+            swWakeLock = lock;
+            try{
+              lock.addEventListener("release", function(){ swWakeLock = null; });
+            }catch(e){}
+          }).catch(function(){ /* 失敗してもエラーにしない */ });
+        }
+      }
+    }catch(e){ /* 非対応ブラウザでは何もしない */ }
+  }
+  function swReleaseWakeLock(){
+    try{
+      if(swWakeLock && swWakeLock.release){
+        var r = swWakeLock.release();
+        if(r && r.catch) r.catch(function(){});
+      }
+    }catch(e){}
+    swWakeLock = null;
+  }
+  document.addEventListener("visibilitychange", function(){
+    if(document.visibilityState === "visible" && swState === "running" && !swWakeLock){
+      swRequestWakeLock();
+    }
+  });
+
+  function swRenderLaps(){
+    var n = swLaps.length;
+    swDistEl.textContent = n + "ラップ ＝ " + (n * 25) + "m相当";
+    if(!n){
+      swLapsWrap.style.display = "none";
+      swLapsEl.innerHTML = "";
+      return;
+    }
+    swLapsWrap.style.display = "block";
+    var durations = swLaps.map(function(cum, i){
+      return cum - (i > 0 ? swLaps[i-1] : 0);
+    });
+    var fastestIdx = -1, fastestVal = Infinity;
+    if(n >= 2){
+      durations.forEach(function(d, i){ if(d < fastestVal){ fastestVal = d; fastestIdx = i; } });
+    }
+    var html = "";
+    for(var i = n - 1; i >= 0; i--){
+      html += "<div class='sw-lap-row" + (i === fastestIdx ? " sw-best-lap" : "") + "'>" +
+        "<span class='no'>" + (i + 1) + "</span>" +
+        "<span class='lap-t'>" + esc(formatSW(durations[i])) + (i === fastestIdx ? " ★最速" : "") + "</span>" +
+        "<span class='cum'>" + esc(formatSW(swLaps[i])) + "</span>" +
+      "</div>";
+    }
+    swLapsEl.innerHTML = html;
+  }
+  function swUpdateControls(){
+    var running = swState === "running";
+    var stopped = swState === "stopped";
+    swMainBtn.style.display = stopped ? "none" : "";
+    swMainBtn.textContent = running ? "ストップ" : "スタート";
+    swMainBtn.className = "sw-main-btn " + (running ? "sw-main-stop" : "sw-main-start");
+    swLapBtn.style.display = running ? "" : "none";
+    swStoppedActions.style.display = stopped ? "" : "none";
+    if(running){
+      swStatusEl.textContent = "計測中… 25mごとにラップを押してください";
+      swStatusEl.className = "sw-status running";
+    } else if(stopped){
+      swStatusEl.textContent = "停止中 — 合計 " + formatSW(swCurrentMs());
+      swStatusEl.className = "sw-status";
+    } else {
+      swStatusEl.textContent = "待機中 — 丸いスタートボタンを押して測定開始";
+      swStatusEl.className = "sw-status";
+    }
+    swRenderLaps();
+  }
+
+  function swResume(){
+    swStartStamp = performance.now();
+    swState = "running";
+    swStartLoop();
+    swRequestWakeLock();
+    swUpdateControls();
+  }
+  swMainBtn.addEventListener("click", function(){
+    if(swState === "running"){
+      swElapsedBase = swCurrentMs();
+      swState = "stopped";
+      swStopLoop();
+      swReleaseWakeLock();
+      swUpdateControls();
+    } else if(swState === "idle"){
+      swResume();
+    }
+  });
+  swResumeBtn.addEventListener("click", function(){
+    if(swState === "stopped") swResume();
+  });
+  swLapBtn.addEventListener("click", function(){
+    if(swState !== "running") return;
+    swLaps.push(swCurrentMs());
+    swRenderLaps();
+  });
+  swResetBtn.addEventListener("click", function(){
+    if(swState === "running") return;
+    openConfirm("測定をリセットしますか？",
+      "合計タイム " + formatSW(swCurrentMs()) + " とラップ " + swLaps.length + "件を消します。\nまだ記録に保存していない場合、元に戻せません。",
+      "リセットする",
+      function(){
+        swState = "idle";
+        swElapsedBase = 0;
+        swLaps = [];
+        swStopLoop();
+        swTimeEl.textContent = "0:00.00";
+        swReleaseWakeLock();
+        /* リセット時は確認ボタンの文言を戻す */
+        document.getElementById("modalOk").textContent = "削除する";
+        swUpdateControls();
+        toast("測定をリセットしました");
+      });
+    /* この確認だけボタン文言を差し替え（openConfirm が既に okLabel を反映済み） */
+  });
+  /* ---- quick-save panel: save without leaving the measure screen ---- */
+  var swStrokeSel = STROKES[0];
+  var swDistSel = 25;
+  var swCourseSel = "短水路";
+  var swCourseChips = document.getElementById("swCourseChips");
+  var swCourseLabel = document.getElementById("swCourseLabel");
+  function swRenderChips(){
+    swStrokeChips.innerHTML = STROKES.map(function(s){
+      return "<button type='button' class='chip' data-stroke='" + esc(s) + "' aria-pressed='" + (s === swStrokeSel ? "true" : "false") + "'>" + esc(s) + "</button>";
+    }).join("");
+    Array.prototype.forEach.call(swStrokeChips.querySelectorAll("[data-stroke]"), function(b){
+      b.addEventListener("click", function(){ swStrokeSel = b.getAttribute("data-stroke"); swRenderChips(); });
+    });
+    swDistChips.innerHTML = DISTANCES.map(function(d){
+      return "<button type='button' class='chip' data-dist='" + d + "' aria-pressed='" + (d === swDistSel ? "true" : "false") + "'>" + d + "m</button>";
+    }).join("");
+    Array.prototype.forEach.call(swDistChips.querySelectorAll("[data-dist]"), function(b){
+      b.addEventListener("click", function(){ swDistSel = Number(b.getAttribute("data-dist")); swRenderChips(); });
+    });
+    var showCourse = swDistSel >= 50;
+    swCourseLabel.style.display = showCourse ? "" : "none";
+    swCourseChips.style.display = showCourse ? "" : "none";
+    if(showCourse){
+      swCourseChips.innerHTML = COURSES.map(function(c){
+        var label = c === "短水路" ? "短水路（25m）" : "長水路（50m）";
+        return "<button type='button' class='chip' data-course='" + esc(c) + "' aria-pressed='" + (c === swCourseSel ? "true" : "false") + "'>" + esc(label) + "</button>";
+      }).join("");
+      Array.prototype.forEach.call(swCourseChips.querySelectorAll("[data-course]"), function(b){
+        b.addEventListener("click", function(){ swCourseSel = b.getAttribute("data-course"); swRenderChips(); });
+      });
+    } else {
+      swCourseChips.innerHTML = "";
+      swCourseSel = "短水路";
+    }
+  }
+  function swOpenSavePanel(){
+    if(swState !== "stopped") return;
+    var totalSec = Math.round(swCurrentMs() / 10) / 100;
+    var distFromLaps = swLaps.length * 25;
+    if(swLaps.length > 0 && DISTANCES.indexOf(distFromLaps) >= 0) swDistSel = distFromLaps;
+    swSaveTimeEl.textContent = formatSW(swCurrentMs()) + "（" + formatTime(totalSec) + "）";
+    swSaveDateEl.textContent = formatDateJP(todayISO()) + " の記録として保存します";
+    swSaveForm.style.display = "";
+    swSaveResult.style.display = "none";
+    swRenderChips();
+    swControls.style.display = "none";
+    swSavePanel.style.display = "";
+    document.querySelector(".measure-shell").classList.add("is-saving");
+  }
+  function swCloseSavePanel(){
+    swSavePanel.style.display = "none";
+    swControls.style.display = "";
+    document.querySelector(".measure-shell").classList.remove("is-saving");
+  }
+  swRecordBtn.addEventListener("click", swOpenSavePanel);
+  swSaveCancelBtn.addEventListener("click", swCloseSavePanel);
+  swSaveConfirmBtn.addEventListener("click", function(){
+    if(swState !== "stopped") return;
+    var totalSec = Math.round(swCurrentMs() / 10) / 100;
+    if(totalSec <= 0) return;
+    var kindEl = document.querySelector('input[name="swKind"]:checked');
+    var res = addRecord({
+      date: todayISO(),
+      stroke: swStrokeSel,
+      distance: swDistSel,
+      course: swDistSel >= 50 ? swCourseSel : "短水路",
+      timeSec: totalSec,
+      kind: kindEl ? kindEl.value : "練習",
+      memo: swLaps.length ? "ストップウォッチ測定（" + swLaps.length + "ラップ）" : "ストップウォッチ測定"
+    });
+    var swLabel = labelOf(swStrokeSel, swDistSel, swDistSel >= 50 ? swCourseSel : "短水路");
+    if(res.beatBest){
+      swSaveResultBanner.className = "banner show pb";
+      swSaveResultBanner.innerHTML = "<span class='big'>🎉 ベスト更新！</span><br>" +
+        esc(swLabel) + "　" + esc(formatTime(res.prevBest.timeSec)) + " → <b>" + esc(formatTime(totalSec)) + "</b>（" +
+        (res.prevBest.timeSec - totalSec).toFixed(2) + "秒速くなりました）";
+    } else if(res.isFirst){
+      swSaveResultBanner.className = "banner show ok";
+      swSaveResultBanner.textContent = "保存しました。" + swLabel + " の最初の記録です（自己ベスト）。";
+    } else {
+      swSaveResultBanner.className = "banner show ok";
+      swSaveResultBanner.textContent = "保存しました。" + swLabel + "：" + formatTime(totalSec) + "（ベストは " + formatTime(res.prevBest.timeSec) + "）";
+    }
+    swSaveForm.style.display = "none";
+    swSaveResult.style.display = "";
+    toast("記録を保存しました");
+  });
+  swSaveDoneBtn.addEventListener("click", function(){
+    swCloseSavePanel();
+    swState = "idle";
+    swElapsedBase = 0;
+    swLaps = [];
+    swStopLoop();
+    swTimeEl.textContent = "0:00.00";
+    swReleaseWakeLock();
+    swUpdateControls();
+  });
+  swUpdateControls();
+
+  /* ---- settings ---- */
+  var sName = document.getElementById("sName");
+  sName.value = childName === "お子さん" ? "" : childName;
+  sName.placeholder = "例：はると（未入力なら「お子さん」）";
+  document.getElementById("btnSaveName").addEventListener("click", function(){
+    childName = sName.value.trim() || "お子さん";
+    saveName(); renderHeader();
+    toast("名前を保存しました");
+  });
+
+  function download(filename, content, type){
+    var blob = new Blob([content], { type: type });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 800);
+  }
+  function stamp(){
+    var d = new Date();
+    return d.getFullYear() + String(d.getMonth()+1).padStart(2,"0") + String(d.getDate()).padStart(2,"0");
+  }
+
+  document.getElementById("btnExportJson").addEventListener("click", function(){
+    var payload = { app:"suimingu-kiroku", version:1, exportedAt:new Date().toISOString(), childName:childName, records:records };
+    download("swimming-records-" + stamp() + ".json", JSON.stringify(payload, null, 2), "application/json");
+    toast("JSONを書き出しました");
+  });
+
+  document.getElementById("btnExportCsv").addEventListener("click", function(){
+    var header = "日付,種目,距離(m),水路,タイム(秒),タイム表示,種別,メモ";
+    var rows = records.slice().sort(function(a,b){ return a.date < b.date ? -1 : 1; }).map(function(r){
+      function q(v){ return '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"'; }
+      return [q(r.date), q(r.stroke), r.distance, q(normCourse(r)), r.timeSec.toFixed(2), q(formatTime(r.timeSec)), q(r.kind), q(r.memo || "")].join(",");
+    });
+    download("swimming-records-" + stamp() + ".csv", "﻿" + header + "\n" + rows.join("\n"), "text/csv;charset=utf-8");
+    toast("CSVを書き出しました");
+  });
+
+  document.getElementById("fileImport").addEventListener("change", function(e){
+    var file = e.target.files && e.target.files[0];
+    e.target.value = "";
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(){
+      try{
+        var data = JSON.parse(String(reader.result));
+        var arr = Array.isArray(data) ? data : data.records;
+        if(!Array.isArray(arr)) throw new Error("bad format");
+        var cleaned = arr.filter(validRecord).map(function(r){
+          var dist = Number(r.distance);
+          var courseVal = (dist >= 50 && r.course === "長水路") ? "長水路" : "短水路";
+          return { id:String(r.id), date:String(r.date), stroke:r.stroke, distance:dist, course:courseVal,
+            timeSec:Math.round(Number(r.timeSec)*100)/100, kind:(r.kind === "大会" ? "大会" : "練習"), memo:String(r.memo || "") };
+        });
+        if(!cleaned.length){ toast("読み込める記録がありませんでした"); return; }
+        var ids = {};
+        records.forEach(function(r){ ids[r.id] = true; });
+        var added = 0;
+        cleaned.forEach(function(r){ if(!ids[r.id]){ records.push(r); ids[r.id] = true; added++; } });
+        if(data.childName && typeof data.childName === "string" && data.childName.trim()){
+          childName = data.childName.trim(); saveName();
+          sName.value = childName === "お子さん" ? "" : childName;
+        }
+        saveRecords(); renderHeader();
+        toast(added + "件の記録を読み込みました");
+      }catch(err){
+        toast("読み込みに失敗しました。JSONファイルを確認してください");
+      }
+    };
+    reader.readAsText(file);
+  });
+
+  document.getElementById("btnSample").addEventListener("click", function(){
+    var sample = [
+      { off:70, stroke:"自由形", distance:25, timeSec:38.50, kind:"練習", memo:"レッスン" },
+      { off:49, stroke:"自由形", distance:25, timeSec:36.80, kind:"練習", memo:"レッスン" },
+      { off:42, stroke:"平泳ぎ", distance:25, timeSec:45.20, kind:"練習", memo:"レッスン" },
+      { off:28, stroke:"自由形", distance:25, timeSec:35.42, kind:"練習", memo:"ターンがうまくいった" },
+      { off:21, stroke:"平泳ぎ", distance:25, timeSec:43.60, kind:"練習", memo:"レッスン" },
+      { off:14, stroke:"自由形", distance:25, timeSec:33.90, kind:"練習", memo:"レッスン" },
+      { off:7,  stroke:"平泳ぎ", distance:25, timeSec:42.10, kind:"練習", memo:"レッスン" },
+      { off:3,  stroke:"自由形", distance:25, timeSec:32.75, kind:"大会", memo:"記録会" }
+    ];
+    sample.forEach(function(s, i){
+      records.push({ id: uid() + "s" + i, date: daysAgoISO(s.off), stroke:s.stroke, distance:s.distance, course:"短水路", timeSec:s.timeSec, kind:s.kind, memo:s.memo });
+    });
+    saveRecords(); renderHeader();
+    toast("サンプルデータを入れました（一覧で確認できます）");
+    switchTab("list");
+  });
+
+  document.getElementById("btnDeleteAll").addEventListener("click", function(){
+    if(!records.length){ toast("記録はすでに空です"); return; }
+    openConfirm("全データを削除しますか？",
+      "記録 " + records.length + "件をすべて削除します。\nバックアップ（JSON書き出し）をしていない場合、元に戻せません。",
+      "すべて削除",
+      function(){
+        records = [];
+        saveRecords(); renderHeader(); renderList();
+        toast("全データを削除しました");
+      });
+  });
+
+  /* init */
+  renderHeader();
+  renderList();
+  renderBest();
+  renderGraph();
+})();
+</script>
+<script>
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(() => {});
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function () {});
   });
 }
 </script>

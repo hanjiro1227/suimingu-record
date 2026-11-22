@@ -1,5 +1,5 @@
 // スイミング記録PWA Service Worker
-const CACHE_NAME = "suimingu-pwa-v2";
+const CACHE_NAME = "suimingu-pwa-v3";
 const APP_SHELL = [
   "./",
   "./index.html",
