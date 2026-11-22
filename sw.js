@@ -1,5 +1,5 @@
 // スイミング記録PWA Service Worker
-const CACHE_NAME = "suimingu-pwa-v3";
+const CACHE_NAME = "suimingu-pwa-v4";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -26,6 +26,19 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
+  // ページ本体(HTML)はネットワーク優先：更新が次に開いたときに反映される
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      fetch(event.request)
+        .then((res) => {
+          const copy = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put("./index.html", copy));
+          return res;
+        })
+        .catch(() => caches.match("./index.html"))
+    );
+    return;
+  }
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) return cached;
