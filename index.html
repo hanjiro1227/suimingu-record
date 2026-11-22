@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>スイミング記録</title>
+<meta name="description" content="子どものスイミングのタイム記録アプリ">
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#0284c7">
+<link rel="icon" type="image/png" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+  body {
+    font-family: -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    background: #e0f2fe; color: #0c4a6e;
+    padding: env(safe-area-inset-top) 16px calc(96px + env(safe-area-inset-bottom));
+    max-width: 560px; margin: 0 auto;
+  }
+  header { display: flex; align-items: center; gap: 10px; padding: 16px 0 4px; }
+  header img { width: 38px; height: 38px; border-radius: 9px; }
+  header h1 { font-size: 19px; }
+  header .who { margin-left: auto; font-size: 13px; color: #0369a1; }
+  main section { display: none; }
+  main section.active { display: block; }
+  .card { background: #fff; border-radius: 14px; padding: 16px; margin-top: 14px; box-shadow: 0 1px 5px rgba(2,132,199,.12); }
+  label { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 6px; }
+  label:first-child { margin-top: 0; }
+  select, input[type="date"], input[type="text"], input[type="number"] {
+    width: 100%; font-size: 16px; padding: 12px; border-radius: 10px;
+    border: 2px solid #bae6fd; background: #fff; color: #0c4a6e;
+  }
+  .row { display: flex; gap: 10px; }
+  .row > div { flex: 1; }
+  .btn {
+    display: block; width: 100%; padding: 15px; font-size: 16px; font-weight: 700;
+    color: #fff; background: #0284c7; border: none; border-radius: 999px; cursor: pointer; margin-top: 18px;
+  }
+  .btn:active { background: #0369a1; }
+  .btn.sub { background: #e0f2fe; color: #0369a1; }
+  .btn.danger { background: #fee2e2; color: #b91c1c; }
+  .hint { font-size: 12.5px; color: #64748b; line-height: 1.6; margin-top: 10px; }
+  /* 計測 */
+  #swTime {
+    text-align: center; font-size: 54px; font-weight: 800; font-variant-numeric: tabular-nums;
+    letter-spacing: 1px; margin-top: 10vh;
+  }
+  #swSub { text-align: center; font-size: 13px; color: #0369a1; margin-top: 4px; }
+  #swMainBtn {
+    display: block; margin: 5vh auto 0; width: min(68vw, 260px); height: min(68vw, 260px);
+    border-radius: 50%; border: none; cursor: pointer;
+    background: #0284c7; color: #fff; font-size: 30px; font-weight: 800;
+    box-shadow: 0 8px 24px rgba(2,132,199,.35);
+  }
+  #swMainBtn.running { background: #dc2626; }
+  #swMainBtn:active { transform: scale(.98); }
+  .swBtns { display: flex; justify-content: center; gap: 16px; margin-top: 26px; }
+  .swBtns button {
+    width: 92px; height: 92px; border-radius: 50%; border: 2px solid #7dd3fc; cursor: pointer;
+    background: #fff; color: #0369a1; font-size: 16px; font-weight: 700;
+  }
+  .swBtns button:disabled { opacity: .35; }
+  #lapList { list-style: none; margin-top: 18px; }
+  #lapList li {
+    background: #fff; border-radius: 10px; padding: 10px 14px; margin-bottom: 8px;
+    display: flex; justify-content: space-between; font-size: 15px; font-variant-numeric: tabular-nums;
+    box-shadow: 0 1px 4px rgba(2,132,199,.08);
+  }
+  #lapList .lapTime { font-weight: 700; }
+  /* 一覧 */
+  .recItem { background: #fff; border-radius: 12px; padding: 12px 14px; margin-top: 10px; box-shadow: 0 1px 4px rgba(2,132,199,.08); }
+  .recItem .top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .recItem .what { font-weight: 700; font-size: 15px; }
+  .recItem .time { font-weight: 800; font-size: 19px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .recItem .meta { font-size: 12.5px; color: #64748b; margin-top: 3px; }
+  .recItem .del { background: none; border: none; color: #b91c1c; font-size: 12.5px; text-decoration: underline; cursor: pointer; padding: 4px 0 0; }
+  .pb { display: inline-block; background: #fef3c7; color: #92400e; border-radius: 999px; font-size: 11px; font-weight: 700; padding: 2px 8px; margin-left: 6px; vertical-align: 2px; }
+  .empty { text-align: center; color: #64748b; font-size: 14px; padding: 28px 10px; line-height: 1.7; }
+  /* ベスト */
+  table.best { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  table.best th, table.best td { padding: 9px 6px; border-bottom: 1px solid #e0f2fe; text-align: left; }
+  table.best td.t { font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table.best td.d { color: #64748b; font-size: 12.5px; white-space: nowrap; }
+  /* グラフ */
+  #chart { width: 100%; height: auto; display: block; }
+  /* タブバー */
+  nav#tabs {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+    background: rgba(255,255,255,.96); border-top: 1px solid #bae6fd;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  nav#tabs .inner { display: flex; max-width: 560px; margin: 0 auto; }
+  nav#tabs button {
+    flex: 1; background: none; border: none; cursor: pointer; padding: 9px 0 7px;
+    font-size: 11.5px; color: #64748b; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  }
+  nav#tabs button .ic { font-size: 19px; line-height: 1; }
+  nav#tabs button[aria-selected="true"] { color: #0284c7; font-weight: 700; }
+  #toast {
+    position: fixed; left: 50%; bottom: 110px; transform: translateX(-50%) translateY(20px);
+    background: #0c4a6e; color: #fff; font-size: 14px; padding: 10px 18px; border-radius: 999px;
+    opacity: 0; pointer-events: none; transition: all .25s;
+  }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+<header>
+  <img src="./icon-192.png" alt="">
+  <h1>スイミング記録</h1>
+  <span class="who" id="whoLabel"></span>
+</header>
+
+<main>
+  <!-- 計測 -->
+  <section id="tab-measure" class="active">
+    <div id="swTime">0:00.00</div>
+    <div id="swSub">ストップウォッチ</div>
+    <button id="swMainBtn">スタート</button>
+    <div class="swBtns">
+      <button id="swLapBtn" disabled>ラップ</button>
+      <button id="swResetBtn" disabled>リセット</button>
+    </div>
+    <ul id="lapList"></ul>
+    <div class="card" id="savePanel" style="display:none">
+      <label>種目</label>
+      <select id="svStroke"></select>
+      <div class="row">
+        <div>
+          <label>距離</label>
+          <select id="svDistance"></select>
+        </div>
+        <div id="svCourseWrap">
+          <label>水路</label>
+          <select id="svCourse">
+            <option value="短水路">短水路（25m）</option>
+            <option value="長水路">長水路（50m）</option>
+          </select>
+        </div>
+      </div>
+      <label>種類</label>
+      <select id="svKind">
+        <option value="練習">練習</option>
+        <option value="記録会">記録会</option>
+        <option value="大会">大会</option>
+      </select>
+      <label>メモ（任意）</label>
+      <input type="text" id="svMemo" placeholder="レッスン など">
+      <button class="btn" id="svSaveBtn">このタイムを保存</button>
+      <p class="hint">日付は今日で保存されます。距離が50m以上のときだけ水路（短水路／長水路）を選びます。</p>
+    </div>
+  </section>
+
+  <!-- 記録 -->
+  <section id="tab-record">
+    <div class="card">
+      <label>日付</label>
+      <input type="date" id="fDate">
+      <label>種目</label>
+      <select id="fStroke"></select>
+      <div class="row">
+        <div>
+          <label>距離</label>
+          <select id="fDistance"></select>
+        </div>
+        <div id="fCourseWrap">
+          <label>水路</label>
+          <select id="fCourse">
+            <option value="短水路">短水路（25m）</option>
+            <option value="長水路">長水路（50m）</option>
+          </select>
+        </div>
+      </div>
+      <label>タイム</label>
+      <div class="row">
+        <div><input type="number" id="fMin" min="0" max="59" placeholder="分" inputmode="numeric"></div>
+        <div><input type="number" id="fSec" min="0" max="59" placeholder="秒" inputmode="numeric"></div>
+        <div><input type="number" id="fCs" min="0" max="99" placeholder="1/100" inputmode="numeric"></div>
+      </div>
+      <label>種類</label>
+      <select id="fKind">
+        <option value="練習">練習</option>
+        <option value="記録会">記録会</option>
+        <option value="大会">大会</option>
+      </select>
+      <label>メモ（任意）</label>
+      <input type="text" id="fMemo" placeholder="レッスン など">
+      <button class="btn" id="fAddBtn">記録を追加</button>
+    </div>
+  </section>
+
+  <!-- 一覧 -->
+  <section id="tab-list">
+    <div id="listWrap"></div>
+  </section>
+
+  <!-- ベスト -->
+  <section id="tab-best">
+    <div class="card">
+      <table class="best"><tbody id="bestBody"></tbody></table>
+      <div class="empty" id="bestEmpty" style="display:none">まだ記録がありません。</div>
+      <p class="hint">種目×距離ごとの自己ベストです。50m以上は短水路／長水路で分かれます。</p>
+    </div>
+  </section>
+
+  <!-- グラフ -->
+  <section id="tab-graph">
+    <div class="card">
+      <label>種目</label>
+      <select id="gStroke"></select>
+      <div class="row">
+        <div>
+          <label>距離</label>
+          <select id="gDistance"></select>
+        </div>
+        <div id="gCourseWrap">
+          <label>水路</label>
+          <select id="gCourse">
+            <option value="短水路">短水路（25m）</option>
+            <option value="長水路">長水路（50m）</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:16px"><canvas id="chart" width="640" height="400"></canvas></div>
+      <div class="empty" id="graphEmpty" style="display:none">この条件の記録がまだありません。</div>
+      <p class="hint">タイムの推移です。線が右上がり＝速くなっている、という見方です（上が速い）。</p>
+    </div>
+  </section>
+
+  <!-- 設定 -->
+  <section id="tab-settings">
+    <div class="card">
+      <label>子どもの名前</label>
+      <input type="text" id="setName" placeholder="名前">
+      <button class="btn" id="setNameBtn">名前を保存</button>
+    </div>
+    <div class="card">
+      <label>データのバックアップ</label>
+      <button class="btn sub" id="exportBtn">書き出し（JSONファイル）</button>
+      <label style="margin-top:18px">データの読み込み</label>
+      <input type="file" id="importFile" accept=".json,application/json">
+      <p class="hint">読み込むと今の記録は、ファイルの内容で置き換わります。Muse版スイミング記録から書き出したJSONも読み込めます。</p>
+    </div>
+    <div class="card">
+      <label>危険な操作</label>
+      <button class="btn danger" id="wipeBtn">全データ削除</button>
+      <p class="hint">記録と名前をすべて消します。消す前に書き出しをおすすめします。</p>
+    </div>
+    <div class="card">
+      <p class="hint">このアプリ（PWA版）のデータは、このスマホの中（localStorage）に保存されます。記録の形式はMuse版スイミング記録と同じです。</p>
+    </div>
+  </section>
+</main>
+
+<nav id="tabs">
+  <div class="inner">
+    <button data-tab="measure" aria-selected="true"><span class="ic">⏱</span>計測</button>
+    <button data-tab="record" aria-selected="false"><span class="ic">✎</span>記録</button>
+    <button data-tab="list" aria-selected="false"><span class="ic">☰</span>一覧</button>
+    <button data-tab="best" aria-selected="false"><span class="ic">★</span>ベスト</button>
+    <button data-tab="graph" aria-selected="false"><span class="ic">📈</span>グラフ</button>
+    <button data-tab="settings" aria-selected="false"><span class="ic">⚙</span>設定</button>
+  </div>
+</nav>
+
+<div id="toast"></div>
+
+<script>
+"use strict";
+const STROKES = ["自由形", "背泳ぎ", "平泳ぎ", "バタフライ", "個人メドレー"];
+const DISTANCES = [25, 50, 100, 200];
+const LS_RECORDS = "suimingu_records_v1";
+const LS_NAME = "suimingu_child_name_v1";
+
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
+function todayISO() {
+  const d = new Date();
+  const p = (n) => String(n).padStart(2, "0");
+  return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
+}
+function fmt(sec) {
+  sec = Math.round(sec * 100) / 100;
+  const m = Math.floor(sec / 60);
+  const s = sec - m * 60;
+  const sStr = s.toFixed(2).padStart(5, "0");
+  return m > 0 ? m + ":" + sStr : sStr;
+}
+function fmtSW(ms) {
+  const cs = Math.floor(ms / 10);
+  const m = Math.floor(cs / 6000);
+  const s = Math.floor((cs % 6000) / 100);
+  const c = cs % 100;
+  return m + ":" + String(s).padStart(2, "0") + "." + String(c).padStart(2, "0");
+}
+function esc(t) {
+  return String(t == null ? "" : t).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+}
+function keyOf(r) {
+  return r.stroke + "|" + Number(r.distance) + "|" + (Number(r.distance) >= 50 ? (r.course || "短水路") : "");
+}
+
+let records = [];
+try { records = JSON.parse(localStorage.getItem(LS_RECORDS)) || []; } catch (e) { records = []; }
+if (!Array.isArray(records)) records = [];
+let childName = localStorage.getItem(LS_NAME) || "";
+
+function saveRecords() { localStorage.setItem(LS_RECORDS, JSON.stringify(records)); }
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2200);
+}
+
+/* ---------- 共通UI ---------- */
+function fillSelect(sel, items, fmtFn) {
+  sel.innerHTML = "";
+  for (const it of items) {
+    const o = document.createElement("option");
+    o.value = it;
+    o.textContent = fmtFn ? fmtFn(it) : it;
+    sel.appendChild(o);
+  }
+}
+const distLabel = (d) => d + "m";
+
+function bindCourse(distanceSel, wrap) {
+  const update = () => { wrap.style.display = Number(distanceSel.value) >= 50 ? "" : "none"; };
+  distanceSel.addEventListener("change", update);
+  update();
+}
+
+/* ---------- タブ ---------- */
+const tabBtns = document.querySelectorAll("nav#tabs button");
+tabBtns.forEach((b) => {
+  b.addEventListener("click", () => {
+    tabBtns.forEach((x) => x.setAttribute("aria-selected", x === b ? "true" : "false"));
+    document.querySelectorAll("main section").forEach((s) => s.classList.remove("active"));
+    document.getElementById("tab-" + b.dataset.tab).classList.add("active");
+    if (b.dataset.tab === "list") renderList();
+    if (b.dataset.tab === "best") renderBest();
+    if (b.dataset.tab === "graph") renderGraph();
+    window.scrollTo(0, 0);
+  });
+});
+
+/* ---------- 計測 ---------- */
+let swRunning = false, swStart = 0, swBase = 0, swTimer = null, swLaps = [];
+const swTime = document.getElementById("swTime");
+const swMainBtn = document.getElementById("swMainBtn");
+const swLapBtn = document.getElementById("swLapBtn");
+const swResetBtn = document.getElementById("swResetBtn");
+const lapList = document.getElementById("lapList");
+const savePanel = document.getElementById("savePanel");
+
+function swElapsed() { return swBase + (swRunning ? performance.now() - swStart : 0); }
+function swTick() { swTime.textContent = fmtSW(swElapsed()); }
+function renderLaps() {
+  lapList.innerHTML = "";
+  let prev = 0;
+  swLaps.forEach((lapMs, i) => {
+    const li = document.createElement("li");
+    const left = document.createElement("span");
+    left.textContent = "ラップ" + (i + 1);
+    const mid = document.createElement("span");
+    mid.className = "lapTime";
+    mid.textContent = fmtSW(lapMs - prev);
+    const right = document.createElement("span");
+    right.textContent = fmtSW(lapMs);
+    li.append(left, mid, right);
+    lapList.prepend(li);
+    prev = lapMs;
+  });
+}
+swMainBtn.addEventListener("click", () => {
+  if (!swRunning) {
+    swRunning = true;
+    swStart = performance.now();
+    swTimer = setInterval(swTick, 31);
+    swMainBtn.textContent = "ストップ";
+    swMainBtn.classList.add("running");
+    swLapBtn.disabled = false;
+    swResetBtn.disabled = true;
+    savePanel.style.display = "none";
+  } else {
+    swRunning = false;
+    swBase = swElapsed();
+    clearInterval(swTimer);
+    swTick();
+    swMainBtn.textContent = "スタート";
+    swMainBtn.classList.remove("running");
+    swLapBtn.disabled = true;
+    swResetBtn.disabled = false;
+    if (swBase > 0) savePanel.style.display = "";
+  }
+});
+swLapBtn.addEventListener("click", () => {
+  if (!swRunning) return;
+  swLaps.push(swElapsed());
+  renderLaps();
+});
+swResetBtn.addEventListener("click", () => {
+  swBase = 0; swLaps = [];
+  swTick(); renderLaps();
+  swResetBtn.disabled = true;
+  savePanel.style.display = "none";
+});
+swTick();
+
+const svStroke = document.getElementById("svStroke");
+const svDistance = document.getElementById("svDistance");
+fillSelect(svStroke, STROKES);
+fillSelect(svDistance, DISTANCES, distLabel);
+bindCourse(svDistance, document.getElementById("svCourseWrap"));
+document.getElementById("svSaveBtn").addEventListener("click", () => {
+  const dist = Number(svDistance.value);
+  const rec = {
+    id: uid(),
+    date: todayISO(),
+    stroke: svStroke.value,
+    distance: dist,
+    course: dist >= 50 ? document.getElementById("svCourse").value : null,
+    timeSec: Math.round(swBase / 10) / 100,
+    kind: document.getElementById("svKind").value,
+    memo: document.getElementById("svMemo").value.trim()
+  };
+  if (!(rec.timeSec > 0)) { toast("タイムがありません"); return; }
+  records.push(rec);
+  saveRecords();
+  toast("保存しました：" + rec.stroke + " " + rec.distance + "m " + fmt(rec.timeSec));
+  savePanel.style.display = "none";
+  swBase = 0; swLaps = []; swTick(); renderLaps();
+  swResetBtn.disabled = true;
+});
+
+/* ---------- 記録（手入力） ---------- */
+const fStroke = document.getElementById("fStroke");
+const fDistance = document.getElementById("fDistance");
+fillSelect(fStroke, STROKES);
+fillSelect(fDistance, DISTANCES, distLabel);
+bindCourse(fDistance, document.getElementById("fCourseWrap"));
+document.getElementById("fDate").value = todayISO();
+document.getElementById("fAddBtn").addEventListener("click", () => {
+  const min = Number(document.getElementById("fMin").value) || 0;
+  const sec = Number(document.getElementById("fSec").value) || 0;
+  const cs = Number(document.getElementById("fCs").value) || 0;
+  const timeSec = Math.round((min * 60 + sec + cs / 100) * 100) / 100;
+  if (!(timeSec > 0)) { toast("タイムを入れてください"); return; }
+  const date = document.getElementById("fDate").value || todayISO();
+  const dist = Number(fDistance.value);
+  records.push({
+    id: uid(),
+    date: date,
+    stroke: fStroke.value,
+    distance: dist,
+    course: dist >= 50 ? document.getElementById("fCourse").value : null,
+    timeSec: timeSec,
+    kind: document.getElementById("fKind").value,
+    memo: document.getElementById("fMemo").value.trim()
+  });
+  saveRecords();
+  toast("記録を追加しました");
+  document.getElementById("fMin").value = "";
+  document.getElementById("fSec").value = "";
+  document.getElementById("fCs").value = "";
+  document.getElementById("fMemo").value = "";
+});
+
+/* ---------- 一覧 ---------- */
+function bestMap() {
+  const map = {};
+  for (const r of records) {
+    const k = keyOf(r);
+    if (!map[k] || r.timeSec < map[k].timeSec) map[k] = r;
+  }
+  return map;
+}
+function renderList() {
+  const wrap = document.getElementById("listWrap");
+  if (!records.length) {
+    wrap.innerHTML = '<div class="empty">まだ記録がありません。<br>「計測」で測るか、「記録」から手入力できます。</div>';
+    return;
+  }
+  const bests = bestMap();
+  const sorted = records.slice().sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+  wrap.innerHTML = "";
+  for (const r of sorted) {
+    const div = document.createElement("div");
+    div.className = "recItem";
+    const isPB = bests[keyOf(r)] && bests[keyOf(r)].id === r.id;
+    const courseTxt = Number(r.distance) >= 50 ? "・" + (r.course || "短水路") : "";
+    div.innerHTML =
+      '<div class="top"><span class="what"></span><span class="time"></span></div>' +
+      '<div class="meta"></div>' +
+      '<button class="del">この記録を削除</button>';
+    div.querySelector(".what").textContent = r.stroke + " " + r.distance + "m" + courseTxt + (isPB ? "" : "");
+    if (isPB) {
+      const badge = document.createElement("span");
+      badge.className = "pb";
+      badge.textContent = "ベスト";
+      div.querySelector(".what").appendChild(badge);
+    }
+    div.querySelector(".time").textContent = fmt(r.timeSec);
+    div.querySelector(".meta").textContent = r.date + " ・ " + (r.kind || "練習") + (r.memo ? " ・ " + r.memo : "");
+    div.querySelector(".del").addEventListener("click", () => {
+      if (!confirm("この記録を削除しますか？")) return;
+      records = records.filter((x) => x.id !== r.id);
+      saveRecords();
+      renderList();
+      toast("削除しました");
+    });
+    wrap.appendChild(div);
+  }
+}
+
+/* ---------- ベスト ---------- */
+function renderBest() {
+  const body = document.getElementById("bestBody");
+  const empty = document.getElementById("bestEmpty");
+  const bests = bestMap();
+  const keys = Object.keys(bests).sort((ka, kb) => {
+    const a = bests[ka], b = bests[kb];
+    const si = STROKES.indexOf(a.stroke) - STROKES.indexOf(b.stroke);
+    if (si !== 0) return si;
+    const di = Number(a.distance) - Number(b.distance);
+    if (di !== 0) return di;
+    return String(a.course || "") < String(b.course || "") ? -1 : 1;
+  });
+  body.innerHTML = "";
+  empty.style.display = keys.length ? "none" : "";
+  for (const k of keys) {
+    const r = bests[k];
+    const tr = document.createElement("tr");
+    const courseTxt = Number(r.distance) >= 50 ? " " + (r.course || "短水路") : "";
+    tr.innerHTML = "<td></td><td class='t'></td><td class='d'></td>";
+    tr.children[0].textContent = r.stroke + " " + r.distance + "m" + courseTxt;
+    tr.children[1].textContent = fmt(r.timeSec);
+    tr.children[2].textContent = r.date;
+    body.appendChild(tr);
+  }
+}
+
+/* ---------- グラフ ---------- */
+const gStroke = document.getElementById("gStroke");
+const gDistance = document.getElementById("gDistance");
+fillSelect(gStroke, STROKES);
+fillSelect(gDistance, DISTANCES, distLabel);
+bindCourse(gDistance, document.getElementById("gCourseWrap"));
+[gStroke, gDistance, document.getElementById("gCourse")].forEach((el) => el.addEventListener("change", renderGraph));
+
+function renderGraph() {
+  const canvas = document.getElementById("chart");
+  const empty = document.getElementById("graphEmpty");
+  const dist = Number(gDistance.value);
+  const course = document.getElementById("gCourse").value;
+  const pts = records
+    .filter((r) => r.stroke === gStroke.value && Number(r.distance) === dist && (dist < 50 || (r.course || "短水路") === course))
+    .slice()
+    .sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (!pts.length) { empty.style.display = ""; canvas.style.display = "none"; return; }
+  empty.style.display = "none";
+  canvas.style.display = "";
+  const W = canvas.width, H = canvas.height;
+  const padL = 64, padR = 18, padT = 18, padB = 38;
+  const times = pts.map((p) => p.timeSec);
+  let tMin = Math.min.apply(null, times), tMax = Math.max.apply(null, times);
+  if (tMax - tMin < 1) { tMax += 0.5; tMin -= 0.5; }
+  const pad = (tMax - tMin) * 0.15;
+  tMax += pad; tMin -= pad;
+  const x = (i) => padL + (pts.length === 1 ? (W - padL - padR) / 2 : (i / (pts.length - 1)) * (W - padL - padR));
+  const y = (t) => padT + ((t - tMin) / (tMax - tMin)) * (H - padT - padB);
+  ctx.strokeStyle = "#bae6fd"; ctx.fillStyle = "#64748b"; ctx.font = "20px sans-serif"; ctx.lineWidth = 1;
+  for (let i = 0; i <= 3; i++) {
+    const tv = tMin + ((tMax - tMin) * i) / 3;
+    const yy = y(tv);
+    ctx.beginPath(); ctx.moveTo(padL, yy); ctx.lineTo(W - padR, yy); ctx.stroke();
+    ctx.fillText(fmt(tv), 6, yy + 7);
+  }
+  ctx.fillText(pts[0].date.slice(5), padL, H - 10);
+  if (pts.length > 1) {
+    const last = pts[pts.length - 1].date.slice(5);
+    ctx.fillText(last, W - padR - ctx.measureText(last).width, H - 10);
+  }
+  ctx.strokeStyle = "#0284c7"; ctx.lineWidth = 3; ctx.beginPath();
+  pts.forEach((p, i) => { const xx = x(i), yy = y(p.timeSec); if (i === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy); });
+  ctx.stroke();
+  let bestIdx = 0;
+  pts.forEach((p, i) => { if (p.timeSec < pts[bestIdx].timeSec) bestIdx = i; });
+  pts.forEach((p, i) => {
+    ctx.beginPath();
+    ctx.fillStyle = i === bestIdx ? "#f59e0b" : "#0284c7";
+    ctx.arc(x(i), y(p.timeSec), i === bestIdx ? 7 : 5, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  ctx.fillStyle = "#0c4a6e"; ctx.font = "bold 20px sans-serif";
+  ctx.fillText("ベスト " + fmt(pts[bestIdx].timeSec), padL, padT + 4);
+}
+
+/* ---------- 設定 ---------- */
+const whoLabel = document.getElementById("whoLabel");
+const setName = document.getElementById("setName");
+function renderName() {
+  whoLabel.textContent = childName ? childName + " さん" : "";
+  setName.value = childName;
+}
+renderName();
+document.getElementById("setNameBtn").addEventListener("click", () => {
+  childName = setName.value.trim();
+  localStorage.setItem(LS_NAME, childName);
+  renderName();
+  toast("名前を保存しました");
+});
+document.getElementById("exportBtn").addEventListener("click", () => {
+  const data = JSON.stringify({ childName: childName, records: records }, null, 2);
+  const blob = new Blob([data], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "suimingu-records-" + todayISO() + ".json";
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 3000);
+  toast("書き出しました");
+});
+document.getElementById("importFile").addEventListener("change", (ev) => {
+  const file = ev.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const parsed = JSON.parse(reader.result);
+      const arr = Array.isArray(parsed) ? parsed : parsed.records;
+      if (!Array.isArray(arr)) throw new Error("bad format");
+      const clean = [];
+      for (const r of arr) {
+        if (!r || STROKES.indexOf(r.stroke) < 0 || DISTANCES.indexOf(Number(r.distance)) < 0) continue;
+        if (typeof r.timeSec !== "number" || !isFinite(r.timeSec) || !(r.timeSec > 0)) continue;
+        if (typeof r.date !== "string") continue;
+        const dist = Number(r.distance);
+        clean.push({
+          id: r.id ? String(r.id) : uid(),
+          date: r.date,
+          stroke: r.stroke,
+          distance: dist,
+          course: dist >= 50 ? (r.course === "長水路" ? "長水路" : "短水路") : null,
+          timeSec: r.timeSec,
+          kind: ["練習", "記録会", "大会"].indexOf(r.kind) >= 0 ? r.kind : "練習",
+          memo: r.memo ? String(r.memo) : ""
+        });
+      }
+      if (!confirm("読み込むと今の記録（" + records.length + "件）は、ファイルの記録（" + clean.length + "件）で置き換わります。よろしいですか？")) return;
+      records = clean;
+      if (parsed && typeof parsed.childName === "string") {
+        childName = parsed.childName;
+        localStorage.setItem(LS_NAME, childName);
+        renderName();
+      }
+      saveRecords();
+      toast("読み込みました：" + clean.length + "件");
+    } catch (e) {
+      alert("読み込めませんでした。JSONファイルを確認してください。");
+    }
+    ev.target.value = "";
+  };
+  reader.readAsText(file);
+});
+document.getElementById("wipeBtn").addEventListener("click", () => {
+  if (!confirm("記録と名前をすべて削除します。本当によろしいですか？")) return;
+  records = [];
+  childName = "";
+  localStorage.removeItem(LS_RECORDS);
+  localStorage.removeItem(LS_NAME);
+  renderName();
+  toast("全データ削除しました");
+});
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
